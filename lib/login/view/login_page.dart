@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 8),
                       ButtonApp(
-                        label: 'Log in',
+                        label: 'LOG IN',
                         onPressed: () {
                           if (formKeyLogin.currentState!.validate()) {}
                           ;
