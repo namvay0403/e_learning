@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../home/home.dart';
 import '../../utilities/button/buttonCustom.dart';
 import '../../utilities/constants/constants.dart';
 import '../../utilities/textField/textFieldCustom.dart';
@@ -114,14 +115,14 @@ class _LoginPageState extends State<LoginPage> {
                       ButtonApp(
                         label: 'LOG IN',
                         onPressed: () {
-                          if (formKeyLogin.currentState!.validate()) {}
-                          ;
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => HomePage(),
-                          //   ),
-                          // );
+                          // if (formKeyLogin.currentState!.validate()) {}
+                          // ;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
                         },
                       ),
                     ],

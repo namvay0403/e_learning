@@ -9,7 +9,7 @@ class TextFieldApp extends StatefulWidget {
   TextFieldApp({
     super.key,
     required this.controller,
-    required this.prefixIcon,
+    this.prefixIcon,
     required this.label,
     this.obsecure = true,
     this.validatorFunc,
@@ -18,7 +18,7 @@ class TextFieldApp extends StatefulWidget {
   });
 
   final TextEditingController controller;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
   final String label;
   final bool suffixIcon;
   bool obsecure;
