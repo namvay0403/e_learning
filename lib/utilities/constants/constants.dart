@@ -5,6 +5,9 @@ class AppAssets {
   static String facebook = 'assets/images/facebook.png';
   static String google = 'assets/images/google.png';
   static String phone = 'assets/images/phone.png';
+  static String logo = 'assets/images/logo.png';
+  static String avatar = 'assets/images/avatar.jpg';
+  static String heart = 'assets/images/heart.png';
 }
 
 const fontApp = "GoogleSans-Regular";
