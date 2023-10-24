@@ -25,17 +25,14 @@ class NavBar extends StatelessWidget {
               ),
             ),
             currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                child: Image.asset(
-                  AppAssets.avatar,
-                ),
-              ),
+              backgroundImage: AssetImage(AppAssets.avatar),
             ),
             decoration: const BoxDecoration(
               color: colorProject.primaryColor,
             ),
           ),
           const ListTileWidget(),
+          Footer(),
         ],
       ),
     );
@@ -137,6 +134,54 @@ class ListTileWidget extends StatelessWidget {
           ),
           onTap: () {},
         ),
+      ],
+    );
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        Text(
+          'Copyright © 2021 Tutoring. All rights reserved',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: fontBoldApp,
+            fontWeight: FontWeight.bold,
+            fontSize: fontSize.medium,
+          ),
+        ),
+        Text(
+          'LETTUTOR VIET NAM COMPANY LIMITED (TC: 0317003289)',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: fontBoldApp,
+            fontWeight: FontWeight.bold,
+            fontSize: fontSize.medium,
+          ),
+        ),
+        Text(
+          'Headquarters: 9 Street No. 3, KDC Cityland Park Hills, Ward 10, Go Vap District, Ho Chi Minh City.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: fontBoldApp,
+            fontWeight: FontWeight.bold,
+            fontSize: fontSize.medium,
+          ),
+        ),
+        Text(
+          'Phone: +84 945 337 337.Email: hello@lettutor.com',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: fontBoldApp,
+            fontWeight: FontWeight.bold,
+            fontSize: fontSize.medium,
+          ),
+        )
       ],
     );
   }

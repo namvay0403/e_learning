@@ -1,0 +1,113 @@
+import 'package:e_learning/detail_teacher/widget/profile_teacher.dart';
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+import '../../home/view/widget/navbar.dart';
+import '../../utilities/constants/constants.dart';
+import '../widget/others_review.dart';
+
+class DetailTeacherPage extends StatefulWidget {
+  const DetailTeacherPage({super.key});
+
+  @override
+  State<DetailTeacherPage> createState() => _DetailTeacherPageState();
+}
+
+class _DetailTeacherPageState extends State<DetailTeacherPage> {
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            backgroundColor: colorProject.primaryColor,
+            onPressed: () {
+              //...
+            },
+            heroTag: null,
+            child: const Icon(
+              Icons.card_giftcard,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 10),
+          FloatingActionButton(
+            backgroundColor: colorProject.primaryColor,
+            onPressed: () {},
+            heroTag: null,
+            child: const Icon(
+              Icons.chat,
+              color: Colors.white,
+            ),
+          )
+        ],
+      ),
+      drawer: const NavBar(),
+      appBar: AppBar(
+        title: SizedBox(
+          width: size.width * 0.4,
+          child: Image.asset(AppAssets.logo),
+        ),
+        actions: [
+          Icon(
+            Icons.flag_circle,
+            size: size.width * 0.1,
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProfileTeacher(),
+              const SizedBox(height: 25),
+              const Text(
+                'Others review',
+                style: TextStyle(
+                  fontFamily: fontBoldApp,
+                  fontSize: fontSize.large,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const OthersReview(),
+              const SizedBox(height: 25),
+              SfCalendar(
+                view: CalendarView.week,
+                dataSource: MeetingDataSource(getAppointments()),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+List<Appointment> getAppointments() {
+  List<Appointment> meetings = <Appointment>[];
+  final DateTime today = DateTime.now();
+  final DateTime startTime =
+      DateTime(today.year, today.month, today.day, 1, 0, 0);
+  final DateTime endTime = startTime.add(const Duration(hours: 2));
+
+  meetings.add(Appointment(
+      startTime: startTime,
+      endTime: endTime,
+      subject: 'Book',
+      color: Colors.blue,
+      recurrenceRule: 'FREQ=DAILY;COUNT=10',
+      isAllDay: false));
+
+  return meetings;
+}
+
+class MeetingDataSource extends CalendarDataSource {
+  MeetingDataSource(List<Appointment> source) {
+    appointments = source;
+  }
+}

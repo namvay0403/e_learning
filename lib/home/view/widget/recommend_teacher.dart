@@ -1,3 +1,4 @@
+import 'package:e_learning/detail_teacher/detail_teacher.dart';
 import 'package:e_learning/home/view/widget/card_filter.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -56,24 +57,36 @@ class CardTeacher extends StatelessWidget {
               children: <Widget>[
                 Row(
                   children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage(AppAssets.avatar),
-                      radius: 40,
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => const DetailTeacherPage())),
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage(AppAssets.avatar),
+                        radius: 40,
+                      ),
                     ),
                     const SizedBox(width: 20),
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'April Baldo',
-                          style: TextStyle(
-                            fontFamily: fontBoldApp,
-                            fontSize: fontSize.large,
-                            fontWeight: FontWeight.bold,
+                        InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const DetailTeacherPage())),
+                          child: const Text(
+                            'April Baldo',
+                            style: TextStyle(
+                              fontFamily: fontBoldApp,
+                              fontSize: fontSize.large,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        Text('Philipines'),
-                        Row(
+                        const Text('Philipines'),
+                        const Row(
                           children: [
                             Icon(
                               Icons.star,

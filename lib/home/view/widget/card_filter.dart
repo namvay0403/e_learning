@@ -46,7 +46,7 @@ class CardCustom extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
-        color: const Color(0xC4B1B1B5),
+        color: const Color(0xC4BFBFE0),
       ),
       child: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -55,6 +55,7 @@ class CardCustom extends StatelessWidget {
           style: const TextStyle(
             fontFamily: fontApp,
             fontSize: fontSize.medium,
+            color: colorProject.primaryColor,
           ),
         ),
       ),
