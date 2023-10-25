@@ -1,6 +1,10 @@
+import 'package:e_learning/detail_teacher/detail_teacher.dart';
+import 'package:e_learning/home/home.dart';
 import 'package:e_learning/login/login.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
+
+import '../../../schedule/schedule.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -32,7 +36,8 @@ class NavBar extends StatelessWidget {
             ),
           ),
           const ListTileWidget(),
-          Footer(),
+          const Divider(color: Colors.black54),
+          const Footer(),
         ],
       ),
     );
@@ -47,20 +52,23 @@ class ListTileWidget extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          leading: const Icon(Icons.table_view),
+          leading: const Icon(Icons.computer),
           title: const Text(
-            'Recurring Lesson Schedule',
+            'Tutor',
             style: TextStyle(
               fontFamily: fontBoldApp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => const HomePage()));
+          },
         ),
         ListTile(
-          leading: const Icon(Icons.computer),
+          leading: const Icon(Icons.table_view),
           title: const Text(
-            'Tutor',
+            'Recurring Lesson Schedule',
             style: TextStyle(
               fontFamily: fontBoldApp,
               fontWeight: FontWeight.bold,
@@ -77,7 +85,10 @@ class ListTileWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const SchedulePage()));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.history),
@@ -144,45 +155,48 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Text(
-          'Copyright © 2021 Tutoring. All rights reserved',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: fontBoldApp,
-            fontWeight: FontWeight.bold,
-            fontSize: fontSize.medium,
+    return const Padding(
+      padding: EdgeInsets.all(6),
+      child: Column(
+        children: [
+          Text(
+            'Copyright © 2021 Tutoring. All rights reserved',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: fontBoldApp,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize.textField,
+            ),
           ),
-        ),
-        Text(
-          'LETTUTOR VIET NAM COMPANY LIMITED (TC: 0317003289)',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: fontBoldApp,
-            fontWeight: FontWeight.bold,
-            fontSize: fontSize.medium,
+          Text(
+            'LETTUTOR VIET NAM COMPANY LIMITED (TC: 0317003289)',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: fontBoldApp,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize.textField,
+            ),
           ),
-        ),
-        Text(
-          'Headquarters: 9 Street No. 3, KDC Cityland Park Hills, Ward 10, Go Vap District, Ho Chi Minh City.',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: fontBoldApp,
-            fontWeight: FontWeight.bold,
-            fontSize: fontSize.medium,
+          Text(
+            'Headquarters: 9 Street No. 3, KDC Cityland Park Hills, Ward 10, Go Vap District, Ho Chi Minh City.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: fontBoldApp,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize.textField,
+            ),
           ),
-        ),
-        Text(
-          'Phone: +84 945 337 337.Email: hello@lettutor.com',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontFamily: fontBoldApp,
-            fontWeight: FontWeight.bold,
-            fontSize: fontSize.medium,
-          ),
-        )
-      ],
+          Text(
+            'Phone: +84 945 337 337\nEmail: hello@lettutor.com',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: fontBoldApp,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize.textField,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
