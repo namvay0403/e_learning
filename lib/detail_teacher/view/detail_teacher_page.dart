@@ -1,10 +1,9 @@
-import 'package:e_learning/detail_teacher/widget/profile_teacher.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../home/view/widget/navbar.dart';
 import '../../utilities/constants/constants.dart';
-import '../widget/others_review.dart';
+import '../widgets/others_review.dart';
+import '../widgets/profile_teacher.dart';
 
 class DetailTeacherPage extends StatefulWidget {
   const DetailTeacherPage({super.key});
@@ -44,19 +43,11 @@ class _DetailTeacherPageState extends State<DetailTeacherPage> {
           )
         ],
       ),
-      drawer: const NavBar(),
       appBar: AppBar(
         title: SizedBox(
           width: size.width * 0.4,
           child: Image.asset(AppAssets.logo),
         ),
-        actions: [
-          Icon(
-            Icons.flag_circle,
-            size: size.width * 0.1,
-          ),
-          const SizedBox(width: 10),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

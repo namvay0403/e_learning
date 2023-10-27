@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../home/view/widget/card_filter.dart';
+import '../../home/widgets/card_filter.dart';
 import '../../utilities/constants/constants.dart';
 import '../view/detail_teacher_page.dart';
 

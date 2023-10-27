@@ -1,10 +1,12 @@
 import 'package:e_learning/detail_teacher/detail_teacher.dart';
+import 'package:e_learning/history/history.dart';
 import 'package:e_learning/home/home.dart';
 import 'package:e_learning/login/login.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../../schedule/schedule.dart';
+import '../../history/view/history_page.dart';
+import '../../schedule/schedule.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -99,7 +101,10 @@ class ListTileWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const HistoryPage()));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.play_lesson),

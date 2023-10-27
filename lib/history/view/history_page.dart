@@ -1,18 +1,17 @@
+import 'package:e_learning/history/history.dart';
 import 'package:flutter/material.dart';
 
 import '../../home/widgets/navbar.dart';
 import '../../utilities/constants/constants.dart';
-import '../widget/detail_lesson.dart';
-import '../widget/intro.dart';
 
-class SchedulePage extends StatefulWidget {
-  const SchedulePage({super.key});
+class HistoryPage extends StatefulWidget {
+  const HistoryPage({super.key});
 
   @override
-  State<SchedulePage> createState() => _SchedulePageState();
+  State<HistoryPage> createState() => _HistoryPageState();
 }
 
-class _SchedulePageState extends State<SchedulePage> {
+class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -57,21 +56,7 @@ class _SchedulePageState extends State<SchedulePage> {
           const SizedBox(width: 10),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Intro(),
-              sizedBox.mediumHeight(),
-              const Divider(color: Colors.black12),
-              sizedBox.largeHeight(),
-              const DetailLesson(),
-              const DetailLesson(),
-            ],
-          ),
-        ),
-      ),
+      body: const HistoryScreen(),
     );
   }
 }

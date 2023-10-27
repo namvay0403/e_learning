@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utilities/constants/constants.dart';
+import '../../utilities/constants/constants.dart';
 
 class SelectTime extends StatelessWidget {
   const SelectTime({super.key});
