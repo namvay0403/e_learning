@@ -1,13 +1,12 @@
-import 'package:e_learning/home/view/widget/card_filter.dart';
-import 'package:e_learning/home/view/widget/find_a_tutor.dart';
-import 'package:e_learning/home/view/widget/navbar.dart';
-import 'package:e_learning/home/view/widget/recommend_teacher.dart';
-import 'package:e_learning/home/view/widget/select_time.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/constants/constants.dart';
-import '../../utilities/textField/textFieldCustom.dart';
-import 'widget/upcomming_lesson.dart';
+import '../widgets/card_filter.dart';
+import '../widgets/find_a_tutor.dart';
+import '../widgets/navbar.dart';
+import '../widgets/recommend_teacher.dart';
+import '../widgets/select_time.dart';
+import '../widgets/upcomming_lesson.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

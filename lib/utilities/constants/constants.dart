@@ -9,6 +9,8 @@ class AppAssets {
   static String avatar = 'assets/images/avatar.jpg';
   static String heart = 'assets/images/heart.png';
   static String schedule = 'assets/images/schedule.png';
+  static String history = 'assets/images/history.png';
+  static String courses = 'assets/images/courses.png';
 }
 
 const fontApp = "GoogleSans-Regular";
@@ -18,6 +20,12 @@ class fontSize {
   static const double large = 24;
   static const double medium = 15;
   static const double textField = 14;
+}
+
+class padding {
+  static const double large = 15;
+  static const double medium = 12;
+  static const double small = 8;
 }
 
 class colorProject {

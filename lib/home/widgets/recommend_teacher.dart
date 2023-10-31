@@ -1,7 +1,8 @@
 import 'package:e_learning/detail_teacher/detail_teacher.dart';
-import 'package:e_learning/home/view/widget/card_filter.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'card_filter.dart';
 
 class RecommendTeacher extends StatelessWidget {
   const RecommendTeacher({super.key});

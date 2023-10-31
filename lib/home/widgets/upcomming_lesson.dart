@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../utilities/constants/constants.dart';
+import '../../utilities/constants/constants.dart';
 
 class UpcommingLesson extends StatelessWidget {
   const UpcommingLesson({super.key});
