@@ -11,9 +11,11 @@ class EbookPage extends StatefulWidget {
 class _EbookPageState extends State<EbookPage> {
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'E-Book',
-      style: textStyle.headerStyle(),
+    return Center(
+      child: Text(
+        'E-Book',
+        style: textStyle.headerStyle(),
+      ),
     );
   }
 }

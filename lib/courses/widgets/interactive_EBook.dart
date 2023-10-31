@@ -11,9 +11,11 @@ class InteractiveEBookPage extends StatefulWidget {
 class _InteractiveEBookPageState extends State<InteractiveEBookPage> {
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Interactive E-book',
-      style: textStyle.headerStyle(),
+    return Center(
+      child: Text(
+        'Interactive E-book',
+        style: textStyle.headerStyle(),
+      ),
     );
   }
 }
