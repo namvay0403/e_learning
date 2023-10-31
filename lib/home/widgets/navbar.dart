@@ -1,3 +1,4 @@
+import 'package:e_learning/courses/courses.dart';
 import 'package:e_learning/detail_teacher/detail_teacher.dart';
 import 'package:e_learning/history/history.dart';
 import 'package:e_learning/home/home.dart';
@@ -115,7 +116,10 @@ class ListTileWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const CoursesPage()));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.play_lesson_rounded),

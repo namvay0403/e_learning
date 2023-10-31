@@ -10,6 +10,7 @@ class AppAssets {
   static String heart = 'assets/images/heart.png';
   static String schedule = 'assets/images/schedule.png';
   static String history = 'assets/images/history.png';
+  static String courses = 'assets/images/courses.png';
 }
 
 const fontApp = "GoogleSans-Regular";
