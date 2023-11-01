@@ -1,39 +1,17 @@
-import 'package:e_learning/courses/views/course_info.dart';
-import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:e_learning/utilities/constants/constants.dart';
 
-class CoursePage extends StatefulWidget {
-  const CoursePage({super.key});
+class CardCourse extends StatelessWidget {
+  const CardCourse({super.key});
 
-  @override
-  State<CoursePage> createState() => _CoursePageState();
-}
-
-class _CoursePageState extends State<CoursePage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      itemCount: 3,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const CourseInfo())),
-          child: CardCourse(),
-        );
-      },
-    ));
-  }
-
-  Widget CardCourse() {
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: padding.medium, vertical: padding.medium),
       child: Container(
-        width: size.width / 1.5,
+        width: size.width / 1.3,
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.grey, width: 0.25),
@@ -48,7 +26,7 @@ class _CoursePageState extends State<CoursePage> {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: padding.large),
+          padding: const EdgeInsets.all(padding.large),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -65,10 +43,23 @@ class _CoursePageState extends State<CoursePage> {
                 style: textStyle.normalStyle(),
               ),
               sizedBox.largeHeight(),
-              Text(
-                'Intermediate: 9 Lessons',
-                style: textStyle.headerStyle(fontSize: 14),
-              ),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  width: size.width - 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: colorProject.primaryColor,
+                  ),
+                  child: Text(
+                    'DISCOVER',
+                    style: textStyle.headerStyle(
+                        color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              )
             ],
           ),
         ),
