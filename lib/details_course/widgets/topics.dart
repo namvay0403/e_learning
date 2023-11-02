@@ -1,5 +1,6 @@
 import 'package:e_learning/details_course/widgets/details_topic.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
+import 'package:e_learning/video_call/video_call.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
