@@ -18,6 +18,7 @@ class _CoursesPageState extends State<CoursesPage> {
     return Scaffold(
       drawer: const NavBar(),
       appBar: AppBar(
+        elevation: 0,
         title: SizedBox(
           width: size.width * 0.4,
           child: Image.asset(AppAssets.logo),

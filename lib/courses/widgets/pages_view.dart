@@ -11,12 +11,8 @@ class PagesView extends StatefulWidget {
   State<PagesView> createState() => _PagesViewState();
 }
 
-class _PagesViewState extends State<PagesView> {
-  final PageController _pageController = PageController(initialPage: 0);
-
-  int _activePage = 0;
-
-  final List<Widget> _pages = [
+class _PagesViewState extends State<PagesView> with TickerProviderStateMixin {
+  final List<Widget> pages = [
     const CoursePage(),
     const EbookPage(),
     const InteractiveEBookPage(),
@@ -24,87 +20,52 @@ class _PagesViewState extends State<PagesView> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: padding.large),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    'Course',
-                    style: textStyle.headerStyle(fontSize: 16),
-                  ),
-                  sizedBox.largeWidth(),
-                  Text(
-                    'E-Book',
-                    style: textStyle.headerStyle(fontSize: 16),
-                  ),
-                  sizedBox.largeWidth(),
-                  Text(
-                    'Interactive E-book',
-                    style: textStyle.headerStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const Divider(color: Colors.black12),
-          CardCourse(),
-          CardCourse(),
-          CardCourse(),
-        ],
-      ),
-    );
-  }
-
-  Widget CardCourse() {
-    var size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: padding.medium),
-      child: Container(
-        width: size.width / 1.5,
-        height: 350,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey, width: 0.25),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
+    TabController _tabController = TabController(length: 3, vsync: this);
+    return Column(
+      children: [
+        Container(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: TabBar(
+              indicatorColor: colorProject.primaryColor,
+              controller: _tabController,
+              isScrollable: true,
+              labelStyle: textStyle.headerStyle(fontSize: 14),
+              labelPadding: const EdgeInsets.only(
+                  left: padding.medium, right: padding.large),
+              tabs: const [
+                Tab(
+                  text: 'Course',
+                ),
+                Tab(
+                  text: 'E-book',
+                ),
+                Tab(
+                  text: 'Interactive E-book',
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: padding.large),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          width: double.maxFinite,
+          height: 370,
+          child: TabBarView(
+            controller: _tabController,
             children: [
-              Image.asset(AppAssets.elearning),
-              sizedBox.smallHeight(),
-              Text(
-                'Life in the internet age',
-                softWrap: true,
-                style: textStyle.headerStyle(fontSize: 16),
+              Container(
+                child: pages[0],
               ),
-              sizedBox.mediumHeight(),
-              Text(
-                "Let's discuss how technology is changing the way we live",
-                style: textStyle.normalStyle(),
+              Container(
+                child: pages[1],
               ),
-              sizedBox.largeHeight(),
-              Text(
-                'Intermediate: 9 Lessons',
-                style: textStyle.headerStyle(fontSize: 14),
+              Container(
+                child: pages[2],
               ),
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }
