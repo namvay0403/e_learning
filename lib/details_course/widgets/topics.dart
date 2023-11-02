@@ -1,9 +1,16 @@
+import 'package:e_learning/details_course/widgets/details_topic.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class ListTopics extends StatelessWidget {
+class ListTopics extends StatefulWidget {
   const ListTopics({super.key});
 
+  @override
+  State<ListTopics> createState() => _ListTopicsState();
+}
+
+class _ListTopicsState extends State<ListTopics> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -11,7 +18,13 @@ class ListTopics extends StatelessWidget {
       itemCount: 7,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        return CardTopic(index: index, context: context);
+        return InkWell(
+          onTap: () => {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const DetailsTopic()))
+          },
+          child: CardTopic(index: index, context: context),
+        );
       },
     );
   }

@@ -1,4 +1,4 @@
-import 'package:e_learning/courses/views/course_info.dart';
+import 'package:e_learning/details_course/views/course_info.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 
