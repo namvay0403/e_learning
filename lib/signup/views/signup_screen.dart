@@ -73,8 +73,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validatorFunc: (input) {
                       if (input!.isEmpty) {
                         return 'Not empty';
+                      } else if (!RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(input)) {
+                        return 'Invalid format';
+                      } else {
+                        return null;
                       }
-                      return null;
                     },
                   ),
                 ),
