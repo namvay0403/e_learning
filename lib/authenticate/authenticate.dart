@@ -23,4 +23,12 @@ class AuthenticationRepo {
       return false;
     }
   }
+
+  bool forgotPassword({required String email}) {
+    if (email == user.email) {
+      user.password = '123';
+      return true;
+    }
+    return false;
+  }
 }

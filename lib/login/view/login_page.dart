@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:e_learning/forgot_password/views/forgot_password_page.dart';
 import 'package:e_learning/login/cubit/login_cubit.dart';
 import 'package:e_learning/signup/cubit/signup_cubit.dart';
 import 'package:e_learning/signup/views/signup_page.dart';
@@ -105,8 +106,13 @@ class _LoginPageState extends State<LoginPage> {
                             validatorFunc: (input) {
                               if (input!.isEmpty) {
                                 return 'Not empty';
+                              } else if (!RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(input)) {
+                                return 'Invalid format';
+                              } else {
+                                return null;
                               }
-                              return null;
                             },
                           ),
                         ),
@@ -126,16 +132,25 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                         ),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              'Forgot password?',
-                              style: TextStyle(
-                                  color: colorProject.primaryColor,
-                                  fontSize: fontSize.textField,
-                                  fontFamily: fontBoldApp,
-                                  fontWeight: FontWeight.bold),
+                            InkWell(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPasswordPage(),
+                                ),
+                              ),
+                              child: Text(
+                                'Forgot password?',
+                                style: TextStyle(
+                                    color: colorProject.primaryColor,
+                                    fontSize: fontSize.textField,
+                                    fontFamily: fontBoldApp,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ],
                         ),
