@@ -1,4 +1,7 @@
+import 'package:e_learning/filter/filter_teachers_cubit.dart';
+import 'package:e_learning/teachers/cubit/favourite_teacher_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../utilities/constants/constants.dart';
 
@@ -29,7 +32,11 @@ class CardFilter extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        ElevatedButton(onPressed: () {}, child: const Text('Reset Filters')),
+        ElevatedButton(
+            onPressed: () {
+              context.read<FilterTeachersCubit>().resetFilter();
+            },
+            child: const Text('Reset Filters')),
       ],
     );
   }
@@ -43,22 +50,31 @@ class CardCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: const Color(0xC4BFBFE0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Text(
-          text,
-          style: const TextStyle(
-            fontFamily: fontApp,
-            fontSize: fontSize.medium,
-            color: colorProject.primaryColor,
+    return BlocBuilder<FilterTeachersCubit, FilterTeachersState>(
+      builder: (context, state) {
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: const Color(0xC4BFBFE0),
           ),
-        ),
-      ),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: InkWell(
+              onTap: () {
+                context.read<FilterTeachersCubit>().filter(specific: text);
+              },
+              child: Text(
+                text,
+                style: const TextStyle(
+                  fontFamily: fontApp,
+                  fontSize: fontSize.medium,
+                  color: colorProject.primaryColor,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

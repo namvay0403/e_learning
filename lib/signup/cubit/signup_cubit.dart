@@ -15,8 +15,7 @@ class SignupCubit extends Cubit<SignupState> {
 
   bool signUp({required String email, required String password}) {
     try {
-      user.email = email;
-      user.password = password;
+      authenticationRepo.signUp(email: email, password: password);
       emit(SignupSuccess(user: user));
       print('test ở signup cubit: ${user.email + user.password}');
       return true;
