@@ -82,7 +82,8 @@ class CardTeacher extends StatelessWidget {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const DetailTeacherPage())),
+                                  builder: (_) =>
+                                      DetailTeacherPage(teacher: teacher))),
                           child: CircleAvatar(
                             backgroundImage: AssetImage(AppAssets.avatar),
                             radius: 40,
@@ -97,7 +98,7 @@ class CardTeacher extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) =>
-                                          const DetailTeacherPage())),
+                                          DetailTeacherPage(teacher: teacher))),
                               child: Text(
                                 teacher.name,
                                 style: const TextStyle(

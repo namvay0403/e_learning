@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+import '../../teachers/model/teacher_model.dart';
 import '../../utilities/constants/constants.dart';
 import '../widgets/others_review.dart';
 import '../widgets/profile_teacher.dart';
 
 class DetailTeacherPage extends StatefulWidget {
-  const DetailTeacherPage({super.key});
+  const DetailTeacherPage({super.key, required this.teacher});
+
+  final Teacher teacher;
 
   @override
   State<DetailTeacherPage> createState() => _DetailTeacherPageState();
@@ -55,7 +58,7 @@ class _DetailTeacherPageState extends State<DetailTeacherPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ProfileTeacher(),
+              ProfileTeacher(teacher: widget.teacher),
               const SizedBox(height: 25),
               const Text(
                 'Others review',
