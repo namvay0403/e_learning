@@ -3,6 +3,9 @@ import 'package:e_learning/authenticate/cubit/user_cubit.dart';
 import 'package:e_learning/authenticate/model/user_model.dart';
 import 'package:e_learning/filter/filter_teachers_cubit.dart';
 import 'package:e_learning/login/cubit/login_cubit.dart';
+import 'package:e_learning/profile/cubits/update_avatar/update_profile_cubit.dart';
+import 'package:e_learning/profile/cubits/update_profile/update_avatar_cubit.dart';
+import 'package:e_learning/profile/repo/repo.dart';
 import 'package:e_learning/signup/cubit/signup_cubit.dart';
 import 'package:e_learning/teachers/cubit/favourite_teacher_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +16,8 @@ import 'constants.dart';
 
 AuthenticationRepo authenticationRepo = AuthenticationRepo();
 User user = User();
+
+ChangeProfile changeProfile = ChangeProfile();
 
 List<Teacher> filterListTeachers = [];
 
@@ -110,5 +115,11 @@ final listProvider = [
   ),
   BlocProvider<FilterTeachersCubit>(
     create: (_) => FilterTeachersCubit(),
+  ),
+  BlocProvider<UpdateProfileCubit>(
+    create: (_) => UpdateProfileCubit(changeProfile: changeProfile),
+  ),
+  BlocProvider<UpdateAvatarCubit>(
+    create: (_) => UpdateAvatarCubit(changeProfile: changeProfile),
   ),
 ];
