@@ -4,7 +4,9 @@ import 'package:e_learning/detail_teacher/detail_teacher.dart';
 import 'package:e_learning/history/history.dart';
 import 'package:e_learning/home/home.dart';
 import 'package:e_learning/login/login.dart';
+import 'package:e_learning/profile/views/profile_page.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
+import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../history/view/history_page.dart';
@@ -18,25 +20,29 @@ class NavBar extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            accountName: const Text(
-              'Le Thanh Nam',
-              style: TextStyle(
-                fontFamily: fontApp,
-                fontWeight: FontWeight.bold,
+          InkWell(
+            onTap: () => Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const ProfilePage())),
+            child: UserAccountsDrawerHeader(
+              accountName: Text(
+                user.userName,
+                style: const TextStyle(
+                  fontFamily: fontApp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            accountEmail: const Text(
-              'ltnam43202@gmail.com',
-              style: TextStyle(
-                fontFamily: fontApp,
+              accountEmail: Text(
+                user.email,
+                style: const TextStyle(
+                  fontFamily: fontApp,
+                ),
               ),
-            ),
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage(AppAssets.avatar),
-            ),
-            decoration: const BoxDecoration(
-              color: colorProject.primaryColor,
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage(user.avatar),
+              ),
+              decoration: const BoxDecoration(
+                color: colorProject.primaryColor,
+              ),
             ),
           ),
           const ListTileWidget(),

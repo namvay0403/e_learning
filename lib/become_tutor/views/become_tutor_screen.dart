@@ -178,7 +178,7 @@ class _BecomeTutorScreenState extends State<BecomeTutorScreen> {
                       ),
                       sizedBox.mediumHeight(),
                       ButtonApp(
-                        label: 'LOG IN',
+                        label: 'REGISTER',
                         onPressed: () {
                           if (formKeyTutor.currentState!.validate()) {
                             int id = teachers.length;
