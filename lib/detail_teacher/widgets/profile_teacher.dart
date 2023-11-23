@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../home/widgets/card_filter.dart';
@@ -62,9 +63,22 @@ class ProfileTeacher extends StatelessWidget {
                         size: 35,
                         color: Colors.grey,
                       ),
-                Icon(
-                  Icons.report_gmailerrorred,
-                  size: 35,
+                InkWell(
+                  onTap: () {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.warning,
+                      animType: AnimType.topSlide,
+                      showCloseIcon: true,
+                      title: "Report",
+                      desc: "Thanks for your report",
+                      btnOkOnPress: () {},
+                    ).show();
+                  },
+                  child: Icon(
+                    Icons.report_gmailerrorred,
+                    size: 35,
+                  ),
                 ),
               ],
             ),
