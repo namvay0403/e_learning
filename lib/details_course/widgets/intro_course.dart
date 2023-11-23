@@ -3,8 +3,12 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 
+import '../../courses/model/course_model.dart';
+
 class IntroCourse extends StatelessWidget {
-  const IntroCourse({super.key});
+  const IntroCourse({super.key, required this.course});
+
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +27,9 @@ class IntroCourse extends StatelessWidget {
             ),
           ],
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: padding.medium),
-          child: Text(
-              'Our world is rapidly changing thanks to new technology, and the vocabulary needed to discuss modern life is evolving almost daily. In this course you will learn the most up-to-date terminology from expertly crafted lessons as well from your native-speaking tutor.'),
+          child: Text(course.why),
         ),
         sizedBox.largeHeight(),
         Row(
@@ -42,11 +45,9 @@ class IntroCourse extends StatelessWidget {
             ),
           ],
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: padding.medium),
-          child: Text(
-            'You will learn vocabulary related to timely topics like remote work, artificial intelligence, online privacy, and more. In addition to discussion questions, you will practice intermediate level speaking tasks such as using data to describe trends.',
-          ),
+          child: Text(course.what),
         ),
       ],
     );

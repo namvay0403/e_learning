@@ -1,8 +1,11 @@
+import 'package:e_learning/courses/model/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 
 class CourseLength extends StatelessWidget {
-  const CourseLength({super.key});
+  const CourseLength({super.key, required this.course});
+
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class CourseLength extends StatelessWidget {
           ),
           sizedBox.largeWidth(),
           Text(
-            '9 Topics',
+            '${course.numberOfLesson} Topics',
             style: textStyle.headerStyle(fontSize: 16),
           ),
         ],
