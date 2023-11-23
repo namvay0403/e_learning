@@ -14,6 +14,7 @@ class SelectTime extends StatelessWidget {
           child: TextFormField(
             style: const TextStyle(fontFamily: fontApp),
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(padding.medium),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -42,6 +43,7 @@ class SelectTime extends StatelessWidget {
                 child: TextFormField(
                   style: const TextStyle(fontFamily: fontApp),
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(padding.medium),
                     suffixIcon: const Icon(Icons.watch_later_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -69,6 +71,7 @@ class SelectTime extends StatelessWidget {
                 child: TextFormField(
                   style: const TextStyle(fontFamily: fontApp),
                   decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(padding.medium),
                     suffixIcon: const Icon(Icons.watch_later_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),

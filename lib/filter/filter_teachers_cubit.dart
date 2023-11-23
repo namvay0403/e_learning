@@ -29,4 +29,12 @@ class FilterTeachersCubit extends Cubit<FilterTeachersState> {
     filterListTeachers = [];
     emit(FilterTeachersFailed());
   }
+
+  void find({required String text}) {
+    filterListTeachers = teachers.where((e) {
+      var name = e.name.toLowerCase();
+      return name.contains(text);
+    }).toList();
+    emit(FilterTeachersSuccess(filterTeachers: filterListTeachers));
+  }
 }

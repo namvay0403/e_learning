@@ -1,3 +1,4 @@
+import 'package:e_learning/become_tutor/views/become_tutor_page.dart';
 import 'package:e_learning/courses/courses.dart';
 import 'package:e_learning/detail_teacher/detail_teacher.dart';
 import 'package:e_learning/history/history.dart';
@@ -141,7 +142,10 @@ class ListTileWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const BecomeTutorPage()));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.logout),

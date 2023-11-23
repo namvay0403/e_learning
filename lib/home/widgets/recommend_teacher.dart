@@ -9,9 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'card_filter.dart';
 
-class RecommendTeacher extends StatelessWidget {
+class RecommendTeacher extends StatefulWidget {
   const RecommendTeacher({super.key});
 
+  @override
+  State<RecommendTeacher> createState() => _RecommendTeacherState();
+}
+
+class _RecommendTeacherState extends State<RecommendTeacher> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FilterTeachersCubit, FilterTeachersState>(
@@ -29,7 +34,7 @@ class RecommendTeacher extends StatelessWidget {
               );
             },
           );
-        } else
+        } else {
           return ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -42,6 +47,7 @@ class RecommendTeacher extends StatelessWidget {
               );
             },
           );
+        }
       },
     );
   }
@@ -76,7 +82,8 @@ class CardTeacher extends StatelessWidget {
                           onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => const DetailTeacherPage())),
+                                  builder: (_) =>
+                                      DetailTeacherPage(teacher: teacher))),
                           child: CircleAvatar(
                             backgroundImage: AssetImage(AppAssets.avatar),
                             radius: 40,
@@ -91,7 +98,7 @@ class CardTeacher extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) =>
-                                          const DetailTeacherPage())),
+                                          DetailTeacherPage(teacher: teacher))),
                               child: Text(
                                 teacher.name,
                                 style: const TextStyle(

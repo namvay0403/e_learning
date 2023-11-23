@@ -1,11 +1,15 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
 import '../../home/widgets/card_filter.dart';
+import '../../teachers/model/teacher_model.dart';
 import '../../utilities/constants/constants.dart';
 import '../view/detail_teacher_page.dart';
 
 class ProfileTeacher extends StatelessWidget {
-  const ProfileTeacher({super.key});
+  const ProfileTeacher({super.key, required this.teacher});
+
+  final Teacher teacher;
 
   @override
   Widget build(BuildContext context) {
@@ -19,81 +23,70 @@ class ProfileTeacher extends StatelessWidget {
           children: <Widget>[
             Row(
               children: [
-                InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const DetailTeacherPage())),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage(AppAssets.avatar),
-                    radius: 40,
-                  ),
+                CircleAvatar(
+                  backgroundImage: AssetImage(AppAssets.avatar),
+                  radius: 40,
                 ),
                 const SizedBox(width: 20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InkWell(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const DetailTeacherPage())),
-                      child: const Text(
-                        'April Baldo',
-                        style: TextStyle(
-                          fontFamily: fontBoldApp,
-                          fontSize: fontSize.large,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      teacher.name,
+                      style: TextStyle(
+                        fontFamily: fontBoldApp,
+                        fontSize: fontSize.large,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const Text('Philipines'),
-                    const Row(
+                    Text(teacher.country),
+                    Row(
                       children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
-                        Text('(127)'),
+                        Text('${teacher.rating}/5'),
+                        const Text('(127)'),
                       ],
                     )
                   ],
                 ),
               ],
             ),
-            const Column(
+            Column(
               children: [
-                Icon(
-                  Icons.favorite_border,
-                  size: 35,
-                ),
-                Icon(
-                  Icons.report_gmailerrorred,
-                  size: 35,
+                teacher.isFavourite
+                    ? Icon(
+                        Icons.favorite,
+                        size: 35,
+                        color: Colors.red,
+                      )
+                    : Icon(
+                        Icons.favorite,
+                        size: 35,
+                        color: Colors.grey,
+                      ),
+                InkWell(
+                  onTap: () {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.warning,
+                      animType: AnimType.topSlide,
+                      showCloseIcon: true,
+                      title: "Report",
+                      desc: "Thanks for your report",
+                      btnOkOnPress: () {},
+                    ).show();
+                  },
+                  child: Icon(
+                    Icons.report_gmailerrorred,
+                    size: 35,
+                  ),
                 ),
               ],
             ),
           ],
         ),
         const SizedBox(height: 30),
-        const Text(
-          'Hello! My name is April Baldo, you can just call me Teacher April. I am an English teacher and currently teaching in senior high school. I have been teaching grammar and literature for almost 10 years. I am fond of reading and teaching literature....',
+        Text(
+          '${teacher.description}',
           softWrap: true,
           style: TextStyle(
             fontFamily: fontApp,
@@ -153,16 +146,13 @@ class ProfileTeacher extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Wrap(
             spacing: 10,
             runSpacing: 10,
             children: [
-              CardCustom(text: 'English for Business'),
-              CardCustom(text: 'IELTS'),
-              CardCustom(text: 'PET'),
-              CardCustom(text: 'KET'),
+              for (var item in teacher.specialities) CardCustom(text: item)
             ],
           ),
         ),
