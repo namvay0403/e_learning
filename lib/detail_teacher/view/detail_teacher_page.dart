@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -73,12 +74,28 @@ class _DetailTeacherPageState extends State<DetailTeacherPage> {
               SfCalendar(
                 view: CalendarView.week,
                 dataSource: MeetingDataSource(getAppointments()),
+                onTap: (details) => calendarTapped(context, details),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+void calendarTapped(
+    BuildContext context, CalendarTapDetails calendarTapDetails) {
+  if (calendarTapDetails.targetElement == CalendarElement.appointment) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.topSlide,
+      showCloseIcon: true,
+      title: "Success",
+      desc: "Thanks for registing ${calendarTapDetails.date}",
+      btnOkOnPress: () {},
+    ).show();
   }
 }
 
@@ -96,7 +113,6 @@ List<Appointment> getAppointments() {
       color: Colors.blue,
       recurrenceRule: 'FREQ=DAILY;COUNT=10',
       isAllDay: false));
-
   return meetings;
 }
 
