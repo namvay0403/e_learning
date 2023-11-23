@@ -1,5 +1,7 @@
+import 'package:e_learning/courses/model/course_model.dart';
 import 'package:e_learning/details_course/views/course_info.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
+import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 
 class CoursePage extends StatefulWidget {
@@ -16,18 +18,19 @@ class _CoursePageState extends State<CoursePage> {
         child: ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: 3,
+      itemCount: courses.length,
       itemBuilder: (context, index) {
+        var course = courses[index];
         return InkWell(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const CourseInfo())),
-          child: CardCourse(),
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (_) => CourseInfo(course: course))),
+          child: CardCourse(course: course),
         );
       },
     ));
   }
 
-  Widget CardCourse() {
+  Widget CardCourse({required Course course}) {
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -55,18 +58,18 @@ class _CoursePageState extends State<CoursePage> {
               Image.asset(AppAssets.elearning),
               sizedBox.smallHeight(),
               Text(
-                'Life in the internet age',
+                course.title,
                 softWrap: true,
                 style: textStyle.headerStyle(fontSize: 16),
               ),
               sizedBox.mediumHeight(),
               Text(
-                "Let's discuss how technology is changing the way we live",
+                course.description,
                 style: textStyle.normalStyle(),
               ),
               sizedBox.largeHeight(),
               Text(
-                'Intermediate: 9 Lessons',
+                '${course.level}: ${course.numberOfLesson} Lessons',
                 style: textStyle.headerStyle(fontSize: 14),
               ),
             ],

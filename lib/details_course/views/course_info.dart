@@ -2,6 +2,7 @@ import 'package:e_learning/details_course/widgets/intro_course.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../courses/model/course_model.dart';
 import '../widgets/card_course.dart';
 import '../widgets/course_length.dart';
 import '../widgets/header.dart';
@@ -10,7 +11,9 @@ import '../widgets/suggest_tutor.dart';
 import '../widgets/topics.dart';
 
 class CourseInfo extends StatefulWidget {
-  const CourseInfo({super.key});
+  const CourseInfo({super.key, required this.course});
+
+  final Course course;
 
   @override
   State<CourseInfo> createState() => _CourseInfoState();
@@ -37,16 +40,16 @@ class _CourseInfoState extends State<CourseInfo> {
               ),
               sizedBox.mediumHeight(),
               const Header(text: 'Overview'),
-              const IntroCourse(),
+              IntroCourse(course: widget.course),
               sizedBox.mediumHeight(),
               const Header(text: 'Experience Level'),
-              const Level(),
+              Level(course: widget.course),
               sizedBox.mediumHeight(),
               const Header(text: 'Course Length'),
-              const CourseLength(),
+              CourseLength(course: widget.course),
               sizedBox.mediumHeight(),
               const Header(text: 'List Topic'),
-              const ListTopics(),
+              ListTopics(course: widget.course),
             ],
           ),
         ),
