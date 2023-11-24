@@ -1,9 +1,13 @@
+import 'package:e_learning/history/model/history_courses_model.dart';
+import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/constants/constants.dart';
 
 class DetailHistory extends StatelessWidget {
-  const DetailHistory({super.key});
+  const DetailHistory({super.key, required this.historyCourse});
+
+  final HistoryCourses historyCourse;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +24,19 @@ class DetailHistory extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Thu, 26 Oct 23', style: textStyle.headerStyle()),
-              const Text('15 hours ago'),
-              personalInfo(),
+              Text(
+                  '${historyCourse.time.month},${historyCourse.time.day},${historyCourse.time.year}',
+                  style: textStyle.headerStyle()),
+              Text('${historyCourse.timeAgo} hours ago'),
+              personalInfo(teacherId: historyCourse.teacherId),
               sizedBox.largeHeight(),
-              infoLesson(context),
+              infoLesson(
+                  start: historyCourse.start,
+                  end: historyCourse.end,
+                  size: size.width),
               sizedBox.largeHeight(),
-              requestForLesson(),
+              requestForLesson(
+                  request: historyCourse.request, review: historyCourse.review),
               observe(),
               sizedBox.mediumHeight(),
               button(),
@@ -65,17 +75,18 @@ Widget observe() {
   );
 }
 
-Widget infoLesson(context) {
+Widget infoLesson(
+    {required double size, required DateTime start, required DateTime end}) {
   return Container(
     color: Colors.white,
-    width: MediaQuery.of(context).size.width,
+    width: size,
     child: Padding(
       padding: const EdgeInsets.all(padding.medium),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Lesson Time: 02:00 - 03:25',
+            'Lesson Time: ${start.hour}:${start.minute} - ${end.hour}:${end.minute}',
             style: textStyle.normalStyle(fontSize: 20),
           ),
         ],
@@ -107,7 +118,7 @@ Widget button() {
   );
 }
 
-Widget requestForLesson() {
+Widget requestForLesson({required String request, required String review}) {
   return Container(
     decoration: BoxDecoration(
       color: Colors.white,
@@ -116,46 +127,100 @@ Widget requestForLesson() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('No request for lesson'),
-                Icon(Icons.keyboard_arrow_down_sharp),
-              ],
-            ),
-          ),
-        ),
-        Container(
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Tutor haven't reviewed yet"),
-                Icon(Icons.keyboard_arrow_down_sharp),
-              ],
-            ),
-          ),
-        ),
+        request.isEmpty
+            ? Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 0.5, color: Colors.grey),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('No request for lesson'),
+                      Icon(Icons.keyboard_arrow_down_sharp),
+                    ],
+                  ),
+                ),
+              )
+            : Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 0.5, color: Colors.grey),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('No request for lesson'),
+                          Icon(Icons.keyboard_arrow_down_sharp),
+                        ],
+                      ),
+                      Container(
+                        color: Colors.white,
+                        child: Text('${request}'),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+        review.isEmpty
+            ? Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 0.5, color: Colors.grey),
+                  ),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Tutor haven't reviewed yet"),
+                      Icon(Icons.keyboard_arrow_down_sharp),
+                    ],
+                  ),
+                ),
+              )
+            : Container(
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(width: 0.5, color: Colors.grey),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Tutor haven't reviewed yet"),
+                          Icon(Icons.keyboard_arrow_down_sharp),
+                        ],
+                      ),
+                      Container(
+                        color: Colors.white,
+                        child: Text('${review}'),
+                      )
+                    ],
+                  ),
+                ),
+              ),
       ],
     ),
   );
 }
 
-Widget personalInfo() {
+Widget personalInfo({required int teacherId}) {
   return Container(
     color: Colors.white,
     child: Padding(
@@ -171,10 +236,10 @@ Widget personalInfo() {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'LE THANH NAM',
+                '${teachers[teacherId].name}',
                 style: textStyle.headerStyle(fontSize: 15),
               ),
-              const Text('Viet Nam'),
+              Text('${teachers[teacherId].country}'),
               Row(
                 children: [
                   const Icon(

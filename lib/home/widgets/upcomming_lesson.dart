@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utilities/constants/constants.dart';
+import '../../utilities/constants/list_provider.dart';
 
 class UpcommingLesson extends StatelessWidget {
   const UpcommingLesson({super.key});
@@ -72,9 +73,9 @@ class UpcommingLesson extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 17),
-            const Text(
-              'Total lesson time is 507 hours 30 minutes',
-              style: TextStyle(
+            Text(
+              'Total lesson time is ${user.totalHour} hours ${user.totalMinute} minutes',
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: fontSize.medium,
                 color: Colors.white,

@@ -150,6 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           if (formKeyProfile.currentState!.validate()) {
                             User newUser = new User(
                               userName: userName,
+                              historyCourses: historyCourses,
                             );
                             context
                                 .read<UpdateProfileCubit>()
