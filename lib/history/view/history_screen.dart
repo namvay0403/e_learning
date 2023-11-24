@@ -1,3 +1,4 @@
+import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 import '../../utilities/constants/constants.dart';
 
@@ -24,8 +25,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
             sizedBox.mediumHeight(),
             const Divider(color: Colors.black12),
             sizedBox.largeHeight(),
-            const DetailHistory(),
-            const DetailHistoryWithComment(),
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: user.historyCourses.length,
+              itemBuilder: (context, index) {
+                var historyCourses = user.historyCourses[index];
+                return DetailHistory(historyCourse: historyCourses);
+              },
+            ),
           ],
         ),
       ),

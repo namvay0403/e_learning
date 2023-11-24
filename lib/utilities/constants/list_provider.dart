@@ -12,11 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../courses/model/course_model.dart';
 import '../../forgot_password/cubit/forgot_password_cubit.dart';
+import '../../history/model/history_courses_model.dart';
 import '../../teachers/model/teacher_model.dart';
 import 'constants.dart';
 
 AuthenticationRepo authenticationRepo = AuthenticationRepo();
-User user = User();
+User user = User(historyCourses: historyCourses);
 
 ChangeProfile changeProfile = ChangeProfile();
 
@@ -120,6 +121,47 @@ final List<Course> courses = [
       "",
       4,
       ['Topic 1', 'Topic 2', 'Topic 3', 'Topic 4']),
+];
+
+DateTime now = DateTime.now();
+
+final List<HistoryCourses> historyCourses = [
+  HistoryCourses(
+    DateTime(now.year, now.month, now.day),
+    10,
+    1,
+    DateTime(now.year, now.month, now.day, now.hour + 1, 30),
+    DateTime(now.year, now.month, now.day, now.hour + 2, 30),
+    "",
+    "",
+  ),
+  HistoryCourses(
+    DateTime(now.year, now.month, now.day),
+    10,
+    2,
+    DateTime(now.year, now.month, now.day, now.hour + 1, 30),
+    DateTime(now.year, now.month, now.day, now.hour + 2, 30),
+    "",
+    "5/5",
+  ),
+  HistoryCourses(
+    DateTime(now.year, now.month, now.day),
+    10,
+    3,
+    DateTime(now.year, now.month, now.day, now.hour + 1, 30),
+    DateTime(now.year, now.month, now.day, now.hour + 2, 30),
+    "Oke",
+    "3.5/5",
+  ),
+  HistoryCourses(
+    DateTime(now.year, now.month, now.day),
+    10,
+    5,
+    DateTime(now.year, now.month, now.day, now.hour + 1, 30),
+    DateTime(now.year, now.month, now.day, now.hour + 2, 30),
+    "Oke",
+    "3.5/5",
+  ),
 ];
 
 final listProvider = [
