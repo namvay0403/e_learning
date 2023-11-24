@@ -1,8 +1,10 @@
+import 'package:e_learning/courses/model/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 
 class CardCourse extends StatelessWidget {
-  const CardCourse({super.key});
+  const CardCourse({super.key, required this.course});
+  final Course course;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +35,13 @@ class CardCourse extends StatelessWidget {
               Image.asset(AppAssets.elearning),
               sizedBox.smallHeight(),
               Text(
-                'Life in the internet age',
+                course.title,
                 softWrap: true,
                 style: textStyle.headerStyle(fontSize: 16),
               ),
               sizedBox.mediumHeight(),
               Text(
-                "Let's discuss how technology is changing the way we live",
+                course.description,
                 style: textStyle.normalStyle(),
               ),
               sizedBox.largeHeight(),

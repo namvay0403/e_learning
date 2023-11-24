@@ -151,6 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             User newUser = new User(
                               userName: userName,
                               historyCourses: historyCourses,
+                              myCourses: courses,
                             );
                             context
                                 .read<UpdateProfileCubit>()

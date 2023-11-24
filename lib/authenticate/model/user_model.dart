@@ -1,5 +1,6 @@
 import 'package:e_learning/utilities/constants/constants.dart';
 
+import '../../courses/model/course_model.dart';
 import '../../history/model/history_courses_model.dart';
 
 class User {
@@ -10,6 +11,7 @@ class User {
   late int totalHour;
   late int totalMinute;
   late List<HistoryCourses> historyCourses;
+  late List<Course> myCourses;
 
   User({
     this.email = "namvay0403@gmail.com",
@@ -19,5 +21,6 @@ class User {
     this.totalHour = 440,
     this.totalMinute = 50,
     required this.historyCourses,
+    required this.myCourses,
   });
 }

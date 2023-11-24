@@ -4,6 +4,7 @@ import 'package:e_learning/detail_teacher/detail_teacher.dart';
 import 'package:e_learning/history/history.dart';
 import 'package:e_learning/home/home.dart';
 import 'package:e_learning/login/login.dart';
+import 'package:e_learning/my_courses/views/my_courses_page.dart';
 import 'package:e_learning/profile/views/profile_page.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:e_learning/utilities/constants/list_provider.dart';
@@ -137,7 +138,10 @@ class ListTileWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const MyCoursesPage()));
+          },
         ),
         ListTile(
           leading: const Icon(Icons.person),

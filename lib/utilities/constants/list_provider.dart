@@ -17,7 +17,7 @@ import '../../teachers/model/teacher_model.dart';
 import 'constants.dart';
 
 AuthenticationRepo authenticationRepo = AuthenticationRepo();
-User user = User(historyCourses: historyCourses);
+User user = User(historyCourses: historyCourses, myCourses: courses);
 
 ChangeProfile changeProfile = ChangeProfile();
 
