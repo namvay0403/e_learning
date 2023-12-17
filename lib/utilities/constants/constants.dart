@@ -16,6 +16,8 @@ class AppAssets {
 const fontApp = "GoogleSans-Regular";
 const fontBoldApp = "GoogleSans-Bold";
 
+const baseUrl = 'https://sandbox.api.lettutor.com/';
+
 class fontSize {
   static const double large = 24;
   static const double medium = 15;

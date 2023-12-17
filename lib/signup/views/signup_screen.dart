@@ -50,7 +50,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ).show();
         }
         if (state is SignupSuccess) {
-          Navigator.pop(context);
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.success,
+            animType: AnimType.topSlide,
+            showCloseIcon: true,
+            title: "Success",
+            desc: state.message,
+            btnOkOnPress: () {},
+          ).show();
+          // Navigator.pop(context);
         }
       },
       child: Center(

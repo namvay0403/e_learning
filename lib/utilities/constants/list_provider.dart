@@ -1,5 +1,4 @@
 import 'package:e_learning/authenticate/authenticate.dart';
-import 'package:e_learning/authenticate/cubit/user_cubit.dart';
 import 'package:e_learning/authenticate/model/user_model.dart';
 import 'package:e_learning/filter/filter_teachers_cubit.dart';
 import 'package:e_learning/login/cubit/login_cubit.dart';
@@ -13,12 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../courses/model/course_model.dart';
 import '../../forgot_password/cubit/forgot_password_cubit.dart';
 import '../../history/model/history_courses_model.dart';
+import '../../login/cubit/user_cubit.dart';
 import '../../teachers/model/teacher_model.dart';
 import 'constants.dart';
 
 AuthenticationRepo authenticationRepo = AuthenticationRepo();
-User user = User(historyCourses: historyCourses, myCourses: courses);
-
+User user = User();
 ChangeProfile changeProfile = ChangeProfile();
 
 List<Teacher> filterListTeachers = [];
@@ -166,16 +165,14 @@ final List<HistoryCourses> historyCourses = [
 
 final listProvider = [
   BlocProvider<UserCubit>(
-    create: (_) =>
-        UserCubit(authenticationRepo: authenticationRepo, user: user),
+    create: (_) => UserCubit(),
   ),
   BlocProvider<SignupCubit>(
     create: (_) =>
         SignupCubit(authenticationRepo: authenticationRepo, user: user),
   ),
   BlocProvider<LoginCubit>(
-    create: (_) =>
-        LoginCubit(authenticationRepo: authenticationRepo, user: user),
+    create: (_) => LoginCubit(authenticationRepository: AuthenticationRepo()),
   ),
   BlocProvider<ForgotPasswordCubit>(
     create: (_) => ForgotPasswordCubit(),

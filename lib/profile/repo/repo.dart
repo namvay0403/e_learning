@@ -4,7 +4,7 @@ import '../../utilities/constants/list_provider.dart';
 
 class ChangeProfile {
   bool UpdateInfo({required User newUser}) {
-    user.userName = newUser.userName;
+    user.name = newUser.name;
     return true;
   }
 

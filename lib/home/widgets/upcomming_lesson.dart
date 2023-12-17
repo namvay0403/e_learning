@@ -73,14 +73,14 @@ class UpcommingLesson extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 17),
-            Text(
-              'Total lesson time is ${user.totalHour} hours ${user.totalMinute} minutes',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: fontSize.medium,
-                color: Colors.white,
-              ),
-            ),
+            // Text(
+            //   'Total lesson time is ${user.totalHour} hours ${user.totalMinute} minutes',
+            //   style: const TextStyle(
+            //     fontWeight: FontWeight.bold,
+            //     fontSize: fontSize.medium,
+            //     color: Colors.white,
+            //   ),
+            // ),
           ],
         ),
       ),

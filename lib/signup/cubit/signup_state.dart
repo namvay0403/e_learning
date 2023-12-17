@@ -8,9 +8,9 @@ class SignupInitial extends SignupState {}
 class SignupLoading extends SignupState {}
 
 class SignupSuccess extends SignupState {
-  final User user;
+  String message;
 
-  SignupSuccess({required this.user});
+  SignupSuccess({required this.message});
 }
 
 class SignupFailed extends SignupState {

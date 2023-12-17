@@ -25,15 +25,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
             sizedBox.mediumHeight(),
             const Divider(color: Colors.black12),
             sizedBox.largeHeight(),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: user.historyCourses.length,
-              itemBuilder: (context, index) {
-                var historyCourses = user.historyCourses[index];
-                return DetailHistory(historyCourse: historyCourses);
-              },
-            ),
+            // ListView.builder(
+            //   physics: NeverScrollableScrollPhysics(),
+            //   shrinkWrap: true,
+            //   itemCount: user.historyCourses.length,
+            //   itemBuilder: (context, index) {
+            //     var historyCourses = user.historyCourses[index];
+            //     return DetailHistory(historyCourse: historyCourses);
+            //   },
+            // ),
           ],
         ),
       ),

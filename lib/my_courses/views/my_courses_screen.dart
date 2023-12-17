@@ -8,22 +8,25 @@ class MyCoursesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: user.myCourses.length,
-      itemBuilder: (context, index) {
-        var course = user.myCourses[index];
-        return InkWell(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => CourseInfo(
-                course: course,
-              ),
-            ),
-          ),
-          child: CardCourse(course: course),
-        );
-      },
+    // return ListView.builder(
+    //   itemCount: user.myCourses.length,
+    //   itemBuilder: (context, index) {
+    //     var course = user.myCourses[index];
+    //     return InkWell(
+    //       onTap: () => Navigator.push(
+    //         context,
+    //         MaterialPageRoute(
+    //           builder: (_) => CourseInfo(
+    //             course: course,
+    //           ),
+    //         ),
+    //       ),
+    //       child: CardCourse(course: course),
+    //     );
+    //   },
+    // );
+    return Center(
+      child: Text('Đợi api thay'),
     );
   }
 }

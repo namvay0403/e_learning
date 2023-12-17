@@ -26,20 +26,20 @@ class NavBar extends StatelessWidget {
                 MaterialPageRoute(builder: (_) => const ProfilePage())),
             child: UserAccountsDrawerHeader(
               accountName: Text(
-                user.userName,
+                '${user.name}',
                 style: const TextStyle(
                   fontFamily: fontApp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               accountEmail: Text(
-                user.email,
+                '${user.email}',
                 style: const TextStyle(
                   fontFamily: fontApp,
                 ),
               ),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage(user.avatar),
+                backgroundImage: NetworkImage('${user.avatar}'),
               ),
               decoration: const BoxDecoration(
                 color: colorProject.primaryColor,
@@ -63,6 +63,20 @@ class ListTileWidget extends StatelessWidget {
     return Column(
       children: [
         ListTile(
+          leading: const Icon(Icons.person),
+          title: const Text(
+            'Account',
+            style: TextStyle(
+              fontFamily: fontBoldApp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const ProfilePage()));
+          },
+        ),
+        ListTile(
           leading: const Icon(Icons.computer),
           title: const Text(
             'Tutor',
@@ -72,7 +86,7 @@ class ListTileWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, MaterialPageRoute(builder: (_) => const HomePage()));
           },
         ),
@@ -97,7 +111,7 @@ class ListTileWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushReplacement(context,
+            Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const SchedulePage()));
           },
         ),
@@ -111,7 +125,7 @@ class ListTileWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushReplacement(context,
+            Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const HistoryPage()));
           },
         ),
@@ -125,7 +139,7 @@ class ListTileWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushReplacement(context,
+            Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const CoursesPage()));
           },
         ),
@@ -139,7 +153,7 @@ class ListTileWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushReplacement(context,
+            Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const MyCoursesPage()));
           },
         ),
@@ -153,7 +167,7 @@ class ListTileWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            Navigator.pushReplacement(context,
+            Navigator.push(context,
                 MaterialPageRoute(builder: (_) => const BecomeTutorPage()));
           },
         ),
