@@ -1,5 +1,6 @@
 import 'package:e_learning/details_course/widgets/intro_course.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
+import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../courses/model/course_model.dart';
@@ -34,9 +35,9 @@ class _CourseInfoState extends State<CourseInfo> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.center,
-                child: CardCourse(),
+                child: CardCourse(course: widget.course),
               ),
               sizedBox.mediumHeight(),
               const Header(text: 'Overview'),

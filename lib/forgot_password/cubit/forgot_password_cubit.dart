@@ -7,12 +7,13 @@ part 'forgot_password_state.dart';
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   ForgotPasswordCubit() : super(ForgotPasswordInitial());
 
-  void fotgotPassword({required String email}) {
-    var result = authenticationRepo.forgotPassword(email: email);
-    if (result == true) {
-      emit(ForgotPasswordSuccess());
-    } else {
-      emit(ForgotPasswordFailed());
+  Future<void> fotgotPassword({required String email}) async {
+    emit(ForgotPasswordLoading());
+    try {
+      var response = await authenticationRepo.forgotPassword(email: email);
+      emit(ForgotPasswordSuccess(message: response.toString()));
+    } catch (e) {
+      emit(ForgotPasswordFailed(message: e.toString()));
     }
   }
 }

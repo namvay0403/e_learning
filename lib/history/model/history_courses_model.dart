@@ -1,5 +1,3 @@
-import 'package:e_learning/teachers/model/teacher_model.dart';
-
 class HistoryCourses {
   late DateTime time;
   late int timeAgo;

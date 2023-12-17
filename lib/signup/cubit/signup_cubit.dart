@@ -13,15 +13,14 @@ class SignupCubit extends Cubit<SignupState> {
   final AuthenticationRepo authenticationRepo;
   final User user;
 
-  bool signUp({required String email, required String password}) {
+  Future<void> signUp({required String email, required String password}) async {
     try {
-      authenticationRepo.signUp(email: email, password: password);
-      emit(SignupSuccess(user: user));
-      print('test ở signup cubit: ${user.email + user.password}');
-      return true;
+      emit(SignupLoading());
+      var reponse =
+          await authenticationRepo.signUp(email: email, password: password);
+      emit(SignupSuccess(message: reponse));
     } catch (e) {
-      emit(SignupFailed(error: "Không hợp lệ"));
-      return false;
+      emit(SignupFailed(error: e.toString()));
     }
   }
 }

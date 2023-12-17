@@ -3,6 +3,7 @@ import 'package:e_learning/forgot_password/views/forgot_password_page.dart';
 import 'package:e_learning/login/cubit/login_cubit.dart';
 import 'package:e_learning/signup/cubit/signup_cubit.dart';
 import 'package:e_learning/signup/views/signup_page.dart';
+import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,6 +11,7 @@ import '../../home/home.dart';
 import '../../utilities/button/buttonCustom.dart';
 import '../../utilities/constants/constants.dart';
 import '../../utilities/textField/textFieldCustom.dart';
+import '../cubit/user_cubit.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -43,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             child: BlocListener<LoginCubit, LoginState>(
               listener: (context, state) {
                 // TODO: implement listener
-                if (state is LoginFailed) {
+                if (state is LoginFailure) {
                   AwesomeDialog(
                     context: context,
                     dialogType: DialogType.error,
@@ -61,6 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                       builder: (context) => const HomePage(),
                     ),
                   );
+                  user = state.user;
                 }
               },
               child: Column(
@@ -159,8 +162,8 @@ class _LoginPageState extends State<LoginPage> {
                           label: 'LOG IN',
                           onPressed: () {
                             if (formKeyLogin.currentState!.validate()) {
-                              context.read<LoginCubit>().login(
-                                  email: emailController.text,
+                              context.read<LoginCubit>().logIn(
+                                  username: emailController.text,
                                   password: passwordController.text);
                             }
                             // ;

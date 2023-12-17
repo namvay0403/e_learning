@@ -103,14 +103,14 @@ List<Appointment> getAppointments() {
   List<Appointment> meetings = <Appointment>[];
   final DateTime today = DateTime.now();
   final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 1, 0, 0);
+      DateTime(today.year, today.month, today.day, 9, 0, 0);
   final DateTime endTime = startTime.add(const Duration(hours: 2));
 
   meetings.add(Appointment(
       startTime: startTime,
       endTime: endTime,
       subject: 'Book',
-      color: Colors.blue,
+      color: colorProject.primaryColor,
       recurrenceRule: 'FREQ=DAILY;COUNT=10',
       isAllDay: false));
   return meetings;

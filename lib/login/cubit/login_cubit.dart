@@ -7,21 +7,28 @@ import '../../authenticate/model/user_model.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit({required this.authenticationRepo, required this.user})
-      : super(LoginInitial());
+  LoginCubit({required this.authenticationRepository}) : super(LoginInitial());
 
-  final AuthenticationRepo authenticationRepo;
-  final User user;
+  final AuthenticationRepo authenticationRepository;
 
-  void login({required String email, required String password}) {
-    var result = authenticationRepo.login(email: email, password: password);
-
-    if (result == AuthenticationStatus.authenticated) {
-      emit(LoginSuccess(result: result));
-      print('test ở login cubit: ${result}');
-    } else if (result == AuthenticationStatus.unauthenticated) {
-      emit(LoginFailed(error: result));
-      print('test ở login cubit: ${result}');
+  Future<void> logIn(
+      {required String username, required String password}) async {
+    emit(LoginLoading());
+    try {
+      print('Loading');
+      var res = await authenticationRepository.logIn(
+          username: username, password: password);
+      if (res.status == AuthenticationStatus.authenticated) {
+        emit(LoginSuccess(statusLogin: res.status.toString(), user: res.user!));
+      } else {
+        emit(LoginFailure(error: "Tài khoản hoặc mật khẩu không đúng"));
+      }
+    } catch (e) {
+      emit(LoginFailure(error: e.toString()));
     }
+  }
+
+  Future<void> setInit() async {
+    emit(LoginInitial());
   }
 }

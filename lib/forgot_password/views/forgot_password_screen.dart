@@ -45,7 +45,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   animType: AnimType.topSlide,
                   showCloseIcon: true,
                   title: "Error",
-                  desc: "Email is not existed",
+                  desc: state.message,
                   btnOkOnPress: () {},
                 ).show();
               }
@@ -56,7 +56,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   animType: AnimType.topSlide,
                   showCloseIcon: true,
                   title: "Success",
-                  desc: "Password reset",
+                  desc: state.message,
                   btnOkOnPress: () {},
                 ).show();
               }
@@ -93,7 +93,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             .read<ForgotPasswordCubit>()
                             .fotgotPassword(email: emailController.text);
                       }
-                      // ;
                     },
                   ),
                 ],

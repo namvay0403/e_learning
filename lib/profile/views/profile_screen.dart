@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           .updateProfile(newAvatarPath: AppAssets.google);
                     },
                     child: CircleAvatar(
-                      backgroundImage: AssetImage(user.avatar),
+                      backgroundImage: NetworkImage('${user.avatar}'),
                       radius: 60,
                     ),
                   );
@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       sizedBox.mediumHeight(),
                       SizedBox(
                         child: TextFormField(
-                          initialValue: user.userName,
+                          initialValue: user.name,
                           style: TextStyle(fontFamily: fontApp),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(padding.medium),
@@ -148,14 +148,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         label: 'SAVE',
                         onPressed: () {
                           if (formKeyProfile.currentState!.validate()) {
-                            User newUser = new User(
-                              userName: userName,
-                              historyCourses: historyCourses,
-                            );
-                            context
-                                .read<UpdateProfileCubit>()
-                                .updateProfile(newUser: newUser);
-                            print('newUser is : ${user.userName}');
+                            // User newUser = new User(
+                            //   userName: userName,
+                            //   historyCourses: historyCourses,
+                            //   myCourses: courses,
+                            // );
+                            // context
+                            //     .read<UpdateProfileCubit>()
+                            //     .updateProfile(newUser: newUser);
+                            // print('newUser is : ${user.userName}');
                           }
                         },
                       ),
