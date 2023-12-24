@@ -1,8 +1,9 @@
-import 'package:e_learning/teachers/cubit/favourite_teacher_cubit.dart';
+import 'package:e_learning/teachers/cubit/favourite/favourite_teacher_cubit.dart';
 import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../teachers/cubit/get_teachers/get_teachers_cubit.dart';
 import '../../utilities/constants/constants.dart';
 import '../widgets/card_filter.dart';
 import '../widgets/find_a_tutor.dart';
