@@ -22,8 +22,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKeyLogin = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController =
+      TextEditingController(text: 'phhai@ymail.com');
+  TextEditingController passwordController =
+      TextEditingController(text: '123456');
 
   @override
   void dispose() {
@@ -45,6 +47,27 @@ class _LoginPageState extends State<LoginPage> {
             child: BlocListener<LoginCubit, LoginState>(
               listener: (context, state) {
                 // TODO: implement listener
+                if (state is LoginLoading) {
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) {
+                      return PopScope(
+                        canPop: false,
+                        child: AlertDialog(
+                          content: Container(
+                            height: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: colorProject.primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
                 if (state is LoginFailure) {
                   AwesomeDialog(
                     context: context,

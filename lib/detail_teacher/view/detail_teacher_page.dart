@@ -1,5 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:e_learning/teachers/cubit/get_teacher_by_id/get_teacher_by_id_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../teachers/model/teacher_model.dart';
@@ -18,67 +20,78 @@ class DetailTeacherPage extends StatefulWidget {
 
 class _DetailTeacherPageState extends State<DetailTeacherPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<GetTeacherByIdCubit>().getTeacherById(widget.teacher.id);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            backgroundColor: colorProject.primaryColor,
-            onPressed: () {
-              //...
-            },
-            heroTag: null,
-            child: const Icon(
-              Icons.card_giftcard,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 10),
-          FloatingActionButton(
-            backgroundColor: colorProject.primaryColor,
-            onPressed: () {},
-            heroTag: null,
-            child: const Icon(
-              Icons.chat,
-              color: Colors.white,
-            ),
-          )
-        ],
-      ),
       appBar: AppBar(
         title: SizedBox(
           width: size.width * 0.4,
           child: Image.asset(AppAssets.logo),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ProfileTeacher(teacher: widget.teacher),
-              const SizedBox(height: 25),
-              const Text(
-                'Others review',
-                style: TextStyle(
-                  fontFamily: fontBoldApp,
-                  fontSize: fontSize.large,
-                  fontWeight: FontWeight.bold,
+      body: BlocBuilder<GetTeacherByIdCubit, GetTeacherByIdState>(
+        builder: (context, state) {
+          if (state is GetTeacherByIdLoading) {
+            return PopScope(
+              canPop: false,
+              child: AlertDialog(
+                content: Container(
+                  height: 100,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: colorProject.primaryColor,
+                    ),
+                  ),
                 ),
               ),
-              const OthersReview(),
-              const SizedBox(height: 25),
-              SfCalendar(
-                view: CalendarView.week,
-                dataSource: MeetingDataSource(getAppointments()),
-                onTap: (details) => calendarTapped(context, details),
+            );
+          }
+          if (state is GetTeacherByIdSuccess) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ProfileTeacher(teacher: state.teacher),
+                    const SizedBox(height: 25),
+                    const Text(
+                      'Others review',
+                      style: TextStyle(
+                        fontFamily: fontBoldApp,
+                        fontSize: fontSize.large,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const OthersReview(),
+                    const SizedBox(height: 25),
+                    SfCalendar(
+                      view: CalendarView.week,
+                      dataSource: MeetingDataSource(getAppointments()),
+                      onTap: (details) => calendarTapped(context, details),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
+            );
+          }
+          if (state is GetTeacherByIdFailed) {
+            return Center(
+              child: Text('${state.message} + 123'),
+            );
+          } else {
+            return Center(
+              child: Text('Something went wrong'),
+            );
+          }
+        },
       ),
     );
   }

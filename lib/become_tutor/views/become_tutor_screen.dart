@@ -182,17 +182,17 @@ class _BecomeTutorScreenState extends State<BecomeTutorScreen> {
                         onPressed: () {
                           if (formKeyTutor.currentState!.validate()) {
                             int id = teachers.length;
-                            Teacher teacher = new Teacher(
-                              id,
-                              name,
-                              country,
-                              1.0,
-                              false,
-                              ['TOEIC', 'IELTS'],
-                              description,
-                              AppAssets.avatar,
-                            );
-                            teachers.add(teacher);
+                            // Teacher teacher = new Teacher(
+                            //   1,
+                            //   name,
+                            //   country,
+                            //   1.0,
+                            //   false,
+                            //   ['TOEIC', 'IELTS'],
+                            //   description,
+                            //   AppAssets.avatar,
+                            // );
+                            // teachers.add(teacher);
                             print(teachers.length);
                           }
                           // ;

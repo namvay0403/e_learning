@@ -19,7 +19,7 @@ const fontBoldApp = "GoogleSans-Bold";
 const baseUrl = 'https://sandbox.api.lettutor.com/';
 
 class fontSize {
-  static const double large = 24;
+  static const double large = 22;
   static const double medium = 15;
   static const double textField = 14;
 }

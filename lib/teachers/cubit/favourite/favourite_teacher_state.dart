@@ -8,9 +8,12 @@ class FavouriteTeacherInitial extends FavouriteTeacherState {}
 class FavouriteTeacherLoading extends FavouriteTeacherState {}
 
 class FavouriteTeacherSuccess extends FavouriteTeacherState {
-  final List<Teacher> teachers;
+  final int index;
 
-  FavouriteTeacherSuccess({required this.teachers});
+  FavouriteTeacherSuccess({required this.index});
 }
 
-class FavouriteTeacherFailed extends FavouriteTeacherState {}
+class FavouriteTeacherFailed extends FavouriteTeacherState {
+  String message;
+  FavouriteTeacherFailed({this.message = 'Failed'});
+}

@@ -12,11 +12,11 @@ class FilterTeachersCubit extends Cubit<FilterTeachersState> {
   void filter({required String specific}) {
     for (int i = 0; i < teachers.length; i++) {
       var teacher = teachers[i];
-      if (teacher.specialities.contains(specific)) {
-        if (filterListTeachers.indexOf(teacher) == -1) {
-          filterListTeachers.add(teacher);
-        }
-      }
+      // if (teacher.specialities.contains(specific)) {
+      //   if (filterListTeachers.indexOf(teacher) == -1) {
+      //     filterListTeachers.add(teacher);
+      //   }
+      // }
     }
     for (int i = 0; i < filterListTeachers.length; i++) {
       var teacher = filterListTeachers[i];
@@ -31,6 +31,7 @@ class FilterTeachersCubit extends Cubit<FilterTeachersState> {
   }
 
   void find({required String text}) {
+    print(teachers.length);
     filterListTeachers = teachers.where((e) {
       var name = e.name.toLowerCase();
       return name.contains(text);
