@@ -39,19 +39,10 @@ class _DetailTeacherPageState extends State<DetailTeacherPage> {
       body: BlocBuilder<GetTeacherByIdCubit, GetTeacherByIdState>(
         builder: (context, state) {
           if (state is GetTeacherByIdLoading) {
-            return PopScope(
-              canPop: false,
-              child: AlertDialog(
-                content: Container(
-                  height: 100,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: colorProject.primaryColor,
-                    ),
-                  ),
-                ),
-              ),
-            );
+            return Center(
+                child: CircularProgressIndicator(
+              color: colorProject.primaryColor,
+            ));
           }
           if (state is GetTeacherByIdSuccess) {
             return Padding(
@@ -70,7 +61,7 @@ class _DetailTeacherPageState extends State<DetailTeacherPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const OthersReview(),
+                    OthersReview(tutorId: widget.teacher.userId),
                     const SizedBox(height: 25),
                     SfCalendar(
                       view: CalendarView.week,

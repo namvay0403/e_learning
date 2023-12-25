@@ -24,32 +24,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            backgroundColor: colorProject.primaryColor,
-            onPressed: () {
-              //...
-            },
-            heroTag: null,
-            child: const Icon(
-              Icons.card_giftcard,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 10),
-          FloatingActionButton(
-            backgroundColor: colorProject.primaryColor,
-            onPressed: () {},
-            heroTag: null,
-            child: const Icon(
-              Icons.chat,
-              color: Colors.white,
-            ),
-          )
-        ],
-      ),
       drawer: const NavBar(),
       appBar: AppBar(
         title: SizedBox(

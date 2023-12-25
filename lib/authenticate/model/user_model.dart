@@ -1,6 +1,6 @@
 class User {
   User({
-    this.id,
+    this.id = '1',
     this.email,
     this.name,
     this.avatar,
@@ -21,7 +21,7 @@ class User {
     this.studySchedule,
     this.canSendMessage,
   });
-  late final String? id;
+  late final String id;
   late final String? email;
   late final String? name;
   late final String? avatar;
