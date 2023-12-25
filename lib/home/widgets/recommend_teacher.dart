@@ -18,31 +18,16 @@ class RecommendTeacher extends StatefulWidget {
 }
 
 class _RecommendTeacherState extends State<RecommendTeacher> {
+  String pageNumber = '1';
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<GetTeachersCubit>().getTeachers();
+    context.read<GetTeachersCubit>().getTeachers(pageNumber);
   }
 
   @override
   Widget build(BuildContext context) {
-    // return BlocBuilder<FilterTeachersCubit, FilterTeachersState>(
-    //   builder: (context, state) {
-    //     if (state is FilterTeachersSuccess) {
-    //       return ListView.builder(
-    //         physics: const NeverScrollableScrollPhysics(),
-    //         shrinkWrap: true,
-    //         itemCount: filterListTeachers.length,
-    //         itemBuilder: (context, index) {
-    //           var teacher = filterListTeachers[index];
-    //           return Padding(
-    //             padding: const EdgeInsets.symmetric(vertical: padding.small),
-    //             child: CardTeacher(teacher: teacher),
-    //           );
-    //         },
-    //       );
-    //     } else {
     return BlocBuilder<FilterTeachersCubit, FilterTeachersState>(
       builder: (context, state) {
         if (state is FilterTeachersSuccess) {
@@ -54,7 +39,7 @@ class _RecommendTeacherState extends State<RecommendTeacher> {
               var teacher = filterListTeachers[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: padding.small),
-                child: CardTeacher(teacher: teacher),
+                child: CardTeacher(teacher: teacher, pageNumber: pageNumber),
               );
             },
           );
@@ -69,18 +54,75 @@ class _RecommendTeacherState extends State<RecommendTeacher> {
                 );
               }
               if (state is GetTeachersLoaded) {
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: teachers.length,
-                  itemBuilder: (context, index) {
-                    var teacher = teachers[index];
-                    return Padding(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: padding.small),
-                      child: CardTeacher(teacher: teacher),
-                    );
-                  },
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: teachers.length,
+                      itemBuilder: (context, index) {
+                        var teacher = teachers[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: padding.small),
+                          child: CardTeacher(
+                              teacher: teacher, pageNumber: pageNumber),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    SizedBox(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
+                        itemCount: 5,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Center(
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  pageNumber = (index + 1).toString();
+                                  context
+                                      .read<GetTeachersCubit>()
+                                      .getTeachers(pageNumber);
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(4),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color:
+                                          pageNumber == (index + 1).toString()
+                                              ? Colors.red
+                                              : Colors.grey.withOpacity(0.2),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 4),
+                                    child: Text(
+                                      (index + 1).toString(),
+                                      style: TextStyle(
+                                        color:
+                                            pageNumber == (index + 1).toString()
+                                                ? Colors.red
+                                                : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                  ],
                 );
               }
               if (state is GetTeachersFailed) {
@@ -101,9 +143,11 @@ class _RecommendTeacherState extends State<RecommendTeacher> {
 }
 
 class CardTeacher extends StatelessWidget {
-  const CardTeacher({super.key, required this.teacher});
+  const CardTeacher(
+      {super.key, required this.teacher, required this.pageNumber});
 
   final Teacher teacher;
+  final String pageNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -177,9 +221,8 @@ class CardTeacher extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    context
-                        .read<GetTeachersCubit>()
-                        .addFavouriteTeacher(id: teacher.id);
+                    context.read<GetTeachersCubit>().addFavouriteTeacher(
+                        id: teacher.id, pageNumber: pageNumber);
                     print(teacher.isFavoriteTutor);
                   },
                   child: teacher.isFavoriteTutor != null

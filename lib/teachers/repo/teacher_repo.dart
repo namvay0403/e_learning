@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class TeacherRepo {
-  Future<List<Teacher>> getTeachers() async {
+  Future<List<Teacher>> getTeachers(String pageNumber) async {
     final storage = FlutterSecureStorage();
     String accessToken = await storage.read(key: 'accessToken') ?? "";
     final dio = Dio(
@@ -23,9 +23,16 @@ class TeacherRepo {
       ),
     );
     try {
-      final response = await dio.post(
-        'tutor/search',
-      );
+      final response = await dio.post('tutor/search', data: {
+        "filters": {
+          "specialties": [],
+          "date": null,
+          "nationality": {},
+          "tutoringTimeAvailable": [null, null]
+        },
+        "page": pageNumber,
+        "perPage": 10
+      });
       if (response.statusCode == 200) {
         List<Teacher> teachersTemp = [];
         teachersTemp = response.data['rows']

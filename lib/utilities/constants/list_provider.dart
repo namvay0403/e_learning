@@ -11,9 +11,11 @@ import 'package:e_learning/teachers/cubit/get_teacher_by_id/get_teacher_by_id_cu
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../courses/model/course_model.dart';
+import '../../detail_teacher/cubit/get_reviews/get_reviews_cubit.dart';
 import '../../forgot_password/cubit/forgot_password_cubit.dart';
 import '../../history/model/history_courses_model.dart';
 import '../../login/cubit/user_cubit.dart';
+import '../../schedule/cubit/get_schedules_cubit.dart';
 import '../../teachers/cubit/get_teachers/get_teachers_cubit.dart';
 import '../../teachers/model/teacher_model.dart';
 import 'constants.dart';
@@ -128,5 +130,15 @@ final listProvider = [
   // get teacher by id
   BlocProvider<GetTeacherByIdCubit>(
     create: (_) => GetTeacherByIdCubit(),
+  ),
+
+  // get schedules
+  BlocProvider<GetSchedulesCubit>(
+    create: (_) => GetSchedulesCubit(),
+  ),
+
+  // get reviews
+  BlocProvider<GetReviewsCubit>(
+    create: (_) => GetReviewsCubit(),
   ),
 ];

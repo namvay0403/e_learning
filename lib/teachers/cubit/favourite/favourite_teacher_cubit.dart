@@ -10,11 +10,12 @@ part 'favourite_teacher_state.dart';
 class FavouriteTeacherCubit extends Cubit<FavouriteTeacherState> {
   FavouriteTeacherCubit() : super(FavouriteTeacherInitial());
 
-  Future<void> addFavouriteTeacher({required String id}) async {
+  Future<void> addFavouriteTeacher(
+      {required String id, required String pageNumber}) async {
     emit(FavouriteTeacherLoading());
     try {
       await TeacherRepo().addTeacherFavourite(id);
-      teachers = await TeacherRepo().getTeachers();
+      teachers = await TeacherRepo().getTeachers(pageNumber);
       int index = 0;
       for (int i = 0; i < teachers.length; i++) {
         if (teachers[i].id == id) {

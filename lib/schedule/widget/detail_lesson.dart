@@ -1,9 +1,12 @@
+import 'package:e_learning/schedule/model/schedule_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/constants/constants.dart';
 
 class DetailLesson extends StatelessWidget {
-  const DetailLesson({super.key});
+  const DetailLesson({super.key, required this.scheduleModel});
+
+  final ScheduleModel scheduleModel;
 
   @override
   Widget build(BuildContext context) {

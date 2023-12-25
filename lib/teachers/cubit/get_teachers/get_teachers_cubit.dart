@@ -10,10 +10,10 @@ part 'get_teachers_state.dart';
 class GetTeachersCubit extends Cubit<GetTeachersState> {
   GetTeachersCubit() : super(GetTeachersInitial());
 
-  Future<void> getTeachers() async {
+  Future<void> getTeachers(String pageNumber) async {
     emit(GetTeachersLoading());
     try {
-      teachers = await TeacherRepo().getTeachers();
+      teachers = await TeacherRepo().getTeachers(pageNumber);
       print(teachers.length);
       emit(GetTeachersLoaded(teachers));
     } catch (e) {
@@ -22,11 +22,12 @@ class GetTeachersCubit extends Cubit<GetTeachersState> {
     }
   }
 
-  Future<void> addFavouriteTeacher({required String id}) async {
+  Future<void> addFavouriteTeacher(
+      {required String id, required String pageNumber}) async {
     emit(GetTeachersLoading());
     try {
       await TeacherRepo().addTeacherFavourite(id);
-      teachers = await TeacherRepo().getTeachers();
+      teachers = await TeacherRepo().getTeachers(pageNumber);
       emit(GetTeachersLoaded(teachers));
     } catch (e) {
       print(e.toString());
