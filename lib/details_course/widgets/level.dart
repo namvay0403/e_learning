@@ -3,9 +3,8 @@ import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class Level extends StatelessWidget {
-  const Level({super.key, required this.course});
-
-  final Course course;
+  const Level({super.key, required this.level});
+  final String level;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class Level extends StatelessWidget {
           ),
           sizedBox.largeWidth(),
           Text(
-            course.level,
+            level,
             style: textStyle.headerStyle(fontSize: 16),
           ),
         ],

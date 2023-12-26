@@ -6,9 +6,10 @@ import 'package:e_learning/utilities/constants/constants.dart';
 import '../../courses/model/course_model.dart';
 
 class IntroCourse extends StatelessWidget {
-  const IntroCourse({super.key, required this.course});
+  const IntroCourse({super.key, required this.what, required this.why});
 
-  final Course course;
+  final String why;
+  final String what;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class IntroCourse extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: padding.medium),
-          child: Text(course.why),
+          child: Text(why),
         ),
         sizedBox.largeHeight(),
         Row(
@@ -47,7 +48,7 @@ class IntroCourse extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: padding.medium),
-          child: Text(course.what),
+          child: Text(what),
         ),
       ],
     );

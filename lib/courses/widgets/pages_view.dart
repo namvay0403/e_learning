@@ -4,22 +4,25 @@ import 'package:e_learning/courses/widgets/interactive_EBook.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../model/course_model.dart';
+
 class PagesView extends StatefulWidget {
-  const PagesView({super.key});
+  const PagesView({super.key, required this.courses});
+
+  final List<Course> courses;
 
   @override
   State<PagesView> createState() => _PagesViewState();
 }
 
 class _PagesViewState extends State<PagesView> with TickerProviderStateMixin {
-  final List<Widget> pages = [
-    const CoursePage(),
-    const EbookPage(),
-    const InteractiveEBookPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      CoursePage(courses: widget.courses),
+      const EbookPage(),
+      const InteractiveEBookPage(),
+    ];
     TabController _tabController = TabController(length: 3, vsync: this);
     return Column(
       children: [

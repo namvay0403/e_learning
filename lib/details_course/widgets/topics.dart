@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ListTopics extends StatefulWidget {
-  const ListTopics({super.key, required this.course});
+  const ListTopics({super.key, required this.topics});
 
-  final Course course;
+  final List<Topics> topics;
 
   @override
   State<ListTopics> createState() => _ListTopicsState();
@@ -19,22 +19,25 @@ class _ListTopicsState extends State<ListTopics> {
   Widget build(BuildContext context) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: widget.course.topics.length,
+      itemCount: widget.topics.length,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        var topic = widget.course.topics[index];
+        var topic = widget.topics[index];
         return InkWell(
           onTap: () => {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => const DetailsTopic()))
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => DetailsTopic(
+                        topicLink: topic.nameFile, topicName: topic.name)))
           },
-          child: CardTopic(topic: topic, context: context),
+          child: CardTopic(nameTopic: topic.name, context: context),
         );
       },
     );
   }
 
-  Widget CardTopic({required String topic, required context}) {
+  Widget CardTopic({required String nameTopic, required context}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: padding.medium),
       child: Container(
@@ -50,7 +53,7 @@ class _ListTopicsState extends State<ListTopics> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                topic,
+                nameTopic,
                 style: textStyle.headerStyle(fontSize: 16),
               )
             ],

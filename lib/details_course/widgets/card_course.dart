@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 
 class CardCourse extends StatelessWidget {
-  const CardCourse({super.key, required this.course});
-  final Course course;
+  const CardCourse(
+      {super.key,
+      required this.name,
+      required this.description,
+      required this.imageUrl});
+  final String name;
+  final String description;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -32,16 +38,16 @@ class CardCourse extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(AppAssets.elearning),
+              Image.network(imageUrl),
               sizedBox.smallHeight(),
               Text(
-                course.title,
+                name,
                 softWrap: true,
                 style: textStyle.headerStyle(fontSize: 16),
               ),
               sizedBox.mediumHeight(),
               Text(
-                course.description,
+                description,
                 style: textStyle.normalStyle(),
               ),
               sizedBox.largeHeight(),

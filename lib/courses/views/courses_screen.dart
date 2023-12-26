@@ -1,7 +1,9 @@
+import 'package:e_learning/courses/cubit/get_courses/get_courses_cubit.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_learning/utilities/constants/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/filter_courses.dart';
 import '../widgets/intro.dart';
@@ -16,6 +18,13 @@ class CoursesScreen extends StatefulWidget {
 
 class _CoursesScreenState extends State<CoursesScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<GetCoursesCubit>().getCourses();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
@@ -25,7 +34,22 @@ class _CoursesScreenState extends State<CoursesScreen> {
             sizedBox.mediumHeight(),
             const FilterCourses(),
             sizedBox.mediumHeight(),
-            const PagesView(),
+            BlocBuilder<GetCoursesCubit, GetCoursesState>(
+              builder: (context, state) {
+                if (state is GetCoursesLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is GetCoursesLoaded) {
+                  return PagesView(courses: state.courses);
+                } else if (state is GetCoursesFailed) {
+                  return Center(
+                    child: Text(state.message),
+                  );
+                }
+                return Container();
+              },
+            ),
           ],
         ),
       ),

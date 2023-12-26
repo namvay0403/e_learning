@@ -5,7 +5,9 @@ import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 
 class CoursePage extends StatefulWidget {
-  const CoursePage({super.key});
+  CoursePage({super.key, required this.courses});
+
+  final List<Course> courses;
 
   @override
   State<CoursePage> createState() => _CoursePageState();
@@ -18,19 +20,21 @@ class _CoursePageState extends State<CoursePage> {
         child: ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
-      itemCount: courses.length,
+      itemCount: widget.courses.length,
       itemBuilder: (context, index) {
-        var course = courses[index];
+        var course = widget.courses[index];
         return InkWell(
           onTap: () => Navigator.push(context,
               MaterialPageRoute(builder: (_) => CourseInfo(course: course))),
-          child: CardCourse(course: course),
+          child: CardCourse(course.name, course.description, course.imageUrl,
+              course.level, course.topics.length),
         );
       },
     ));
   }
 
-  Widget CardCourse({required Course course}) {
+  Widget CardCourse(
+      String name, String description, String image, String level, int lesson) {
     var size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -51,25 +55,26 @@ class _CoursePageState extends State<CoursePage> {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: padding.large),
+          padding: const EdgeInsets.symmetric(horizontal: padding.medium),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset(AppAssets.elearning),
+              Image.network(image),
               sizedBox.smallHeight(),
               Text(
-                course.title,
+                name,
                 softWrap: true,
                 style: textStyle.headerStyle(fontSize: 16),
               ),
               sizedBox.mediumHeight(),
               Text(
-                course.description,
+                description,
                 style: textStyle.normalStyle(),
               ),
               sizedBox.largeHeight(),
               Text(
-                '${course.level}: ${course.numberOfLesson} Lessons',
+                'Level: ${level} - ${lesson} Lessons',
                 style: textStyle.headerStyle(fontSize: 14),
               ),
             ],
