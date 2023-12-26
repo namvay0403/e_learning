@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -6,7 +8,7 @@ import '../../utilities/constants/constants.dart';
 import '../model/schedule_model.dart';
 
 class ScheduleRepo {
-  Future<List<ScheduleModel>> getSchedules(String userId) async {
+  Future<List<dynamic>> getSchedules() async {
     final storage = FlutterSecureStorage();
     String accessToken = await storage.read(key: 'accessToken') ?? "";
     final dio = Dio(
@@ -22,24 +24,27 @@ class ScheduleRepo {
       ),
     );
     try {
-      final response = await dio.post('tutor/search', queryParameters: {
-        'userId': userId,
+      final response = await dio.get('booking/list/student', queryParameters: {
+        'page': 1,
+        'perPage': 10,
+        'inFuture': 0,
+        'orderBy': 'meeting',
+        'sortBy': 'asc'
       });
       if (response.statusCode == 200) {
         List<ScheduleModel> schedules = [];
-        if (schedules.length < 10) {
-          schedules = response.data['data']['plans']['bookings']
-              .map<ScheduleModel>((e) => ScheduleModel.fromJson(e))
-              .toList();
-        }
+        schedules = response.data['data']['rows']
+            .map<ScheduleModel>((e) => ScheduleModel.fromJson(e))
+            .toList();
 
         print(
             "-------------------------------------------------------------------------------");
-        print('data reponse: ${schedules.length}');
+        print('data reponse: ${response.data['data']['rows'].length}');
         print(
             "-------------------------------------------------------------------------------");
 
         return schedules;
+        ;
       } else {
         throw response.data['message'];
       }

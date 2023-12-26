@@ -1,67 +1,71 @@
 class ScheduleModel {
   ScheduleModel({
-    required this.createdAtTimeStamp,
-    required this.updatedAtTimeStamp,
-    required this.id,
-    required this.userId,
-    required this.scheduleDetailId,
+    this.createdAtTimeStamp,
+    this.updatedAtTimeStamp,
+    this.id,
+    this.userId,
+    this.scheduleDetailId,
+    this.tutorMeetingLink,
     this.googleMeetLink,
     this.studentRequest,
     this.scoreByTutor,
     this.recordUrl,
     this.cancelReasonId,
-    required this.lessonPlanId,
+    this.lessonPlanId,
     this.cancelNote,
     this.calendarId,
-    required this.isDeleted,
-    required this.isTrial,
-    required this.convertedLesson,
-    required this.scheduleDetailInfo,
-    required this.classReview,
+    this.isDeleted,
+    this.isTrial,
+    this.convertedLesson,
+    this.scheduleDetailInfo,
+    this.classReview,
   });
-  late final dynamic createdAtTimeStamp;
-  late final dynamic updatedAtTimeStamp;
-  late final dynamic id;
-  late final dynamic userId;
-  late final dynamic scheduleDetailId;
-  late final dynamic googleMeetLink;
-  late final dynamic studentRequest;
-  late final dynamic scoreByTutor;
-  late final dynamic recordUrl;
-  late final dynamic cancelReasonId;
-  late final dynamic lessonPlanId;
-  late final dynamic cancelNote;
-  late final dynamic calendarId;
-  late final dynamic isDeleted;
-  late final dynamic isTrial;
-  late final dynamic convertedLesson;
-  late final ScheduleDetailInfo? scheduleDetailInfo;
-  late final ClassReview? classReview;
+  late dynamic createdAtTimeStamp;
+  late dynamic updatedAtTimeStamp;
+  late dynamic id;
+  late dynamic userId;
+  late dynamic scheduleDetailId;
+  late dynamic tutorMeetingLink;
+  late dynamic googleMeetLink;
+  late dynamic studentRequest;
+  late dynamic scoreByTutor;
+  late dynamic recordUrl;
+  late dynamic cancelReasonId;
+  late dynamic lessonPlanId;
+  late dynamic cancelNote;
+  late dynamic calendarId;
+  late dynamic isDeleted;
+  late dynamic isTrial;
+  late dynamic convertedLesson;
+  late dynamic scheduleDetailInfo;
+  late dynamic classReview;
 
-  ScheduleModel.fromJson(Map<String, dynamic> json) {
+  ScheduleModel.fromJson(Map<dynamic, dynamic> json) {
     createdAtTimeStamp = json['createdAtTimeStamp'];
     updatedAtTimeStamp = json['updatedAtTimeStamp'];
     id = json['id'];
     userId = json['userId'];
     scheduleDetailId = json['scheduleDetailId'];
-    googleMeetLink = null;
-    studentRequest = null;
-    scoreByTutor = null;
-    recordUrl = null;
-    cancelReasonId = null;
+    tutorMeetingLink = json['tutorMeetingLink'];
+    googleMeetLink = json['googleMeetLink'];
+    studentRequest = json['studentRequest'];
+    scoreByTutor = json['scoreByTutor'];
+    recordUrl = json['recordUrl'];
+    cancelReasonId = json['cancelReasonId'];
     lessonPlanId = json['lessonPlanId'];
-    cancelNote = null;
-    calendarId = null;
+    cancelNote = json['cancelNote'];
+    calendarId = json['calendarId'];
     isDeleted = json['isDeleted'];
     isTrial = json['isTrial'];
     convertedLesson = json['convertedLesson'];
     scheduleDetailInfo =
         ScheduleDetailInfo.fromJson(json['scheduleDetailInfo']);
-    classReview = ClassReview.fromJson(json['classReview']);
+    // classReview = ClassReview.fromJson(json['classReview']);
+    classReview = null;
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final _data = <dynamic, dynamic>{};
     _data['createdAtTimeStamp'] = createdAtTimeStamp;
     _data['updatedAtTimeStamp'] = updatedAtTimeStamp;
     _data['id'] = id;
@@ -96,17 +100,17 @@ class ScheduleDetailInfo {
     required this.updatedAt,
     required this.scheduleInfo,
   });
-  late final dynamic startPeriodTimestamp;
-  late final dynamic endPeriodTimestamp;
-  late final dynamic id;
-  late final dynamic scheduleId;
-  late final dynamic startPeriod;
-  late final dynamic endPeriod;
-  late final dynamic createdAt;
-  late final dynamic updatedAt;
-  late final ScheduleInfo? scheduleInfo;
+  late dynamic startPeriodTimestamp;
+  late dynamic endPeriodTimestamp;
+  late dynamic id;
+  late dynamic scheduleId;
+  late dynamic startPeriod;
+  late dynamic endPeriod;
+  late dynamic createdAt;
+  late dynamic updatedAt;
+  late dynamic scheduleInfo;
 
-  ScheduleDetailInfo.fromJson(Map<String, dynamic> json) {
+  ScheduleDetailInfo.fromJson(Map<dynamic, dynamic> json) {
     startPeriodTimestamp = json['startPeriodTimestamp'];
     endPeriodTimestamp = json['endPeriodTimestamp'];
     id = json['id'];
@@ -118,8 +122,8 @@ class ScheduleDetailInfo {
     scheduleInfo = ScheduleInfo.fromJson(json['scheduleInfo']);
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final _data = <dynamic, dynamic>{};
     _data['startPeriodTimestamp'] = startPeriodTimestamp;
     _data['endPeriodTimestamp'] = endPeriodTimestamp;
     _data['id'] = id;
@@ -147,19 +151,19 @@ class ScheduleInfo {
     required this.updatedAt,
     required this.tutorInfo,
   });
-  late final dynamic date;
-  late final dynamic startTimestamp;
-  late final dynamic endTimestamp;
-  late final dynamic id;
-  late final dynamic tutorId;
-  late final dynamic startTime;
-  late final dynamic endTime;
-  late final dynamic isDeleted;
-  late final dynamic createdAt;
-  late final dynamic updatedAt;
-  late final TutorInfo? tutorInfo;
+  late dynamic date;
+  late dynamic startTimestamp;
+  late dynamic endTimestamp;
+  late dynamic id;
+  late dynamic tutorId;
+  late dynamic startTime;
+  late dynamic endTime;
+  late dynamic isDeleted;
+  late dynamic createdAt;
+  late dynamic updatedAt;
+  late dynamic tutorInfo;
 
-  ScheduleInfo.fromJson(Map<String, dynamic> json) {
+  ScheduleInfo.fromJson(Map<dynamic, dynamic> json) {
     date = json['date'];
     startTimestamp = json['startTimestamp'];
     endTimestamp = json['endTimestamp'];
@@ -173,8 +177,8 @@ class ScheduleInfo {
     tutorInfo = TutorInfo.fromJson(json['tutorInfo']);
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final _data = <dynamic, dynamic>{};
     _data['date'] = date;
     _data['startTimestamp'] = startTimestamp;
     _data['endTimestamp'] = endTimestamp;
@@ -200,15 +204,15 @@ class TutorInfo {
     required this.birthday,
     required this.timezone,
   });
-  late final dynamic id;
-  late final dynamic name;
-  late final dynamic email;
-  late final dynamic country;
-  late final dynamic avatar;
-  late final dynamic birthday;
-  late final dynamic timezone;
+  late dynamic id;
+  late dynamic name;
+  late dynamic email;
+  late dynamic country;
+  late dynamic avatar;
+  late dynamic birthday;
+  late dynamic timezone;
 
-  TutorInfo.fromJson(Map<String, dynamic> json) {
+  TutorInfo.fromJson(Map<dynamic, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
@@ -218,8 +222,8 @@ class TutorInfo {
     timezone = json['timezone'];
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final _data = <dynamic, dynamic>{};
     _data['id'] = id;
     _data['name'] = name;
     _data['email'] = email;
@@ -253,34 +257,34 @@ class ClassReview {
     required this.overallComment,
     required this.lessonStatus,
   });
-  late final dynamic id;
-  late final dynamic bookingId;
-  late final dynamic lessonStatusId;
-  late final dynamic book;
-  late final dynamic unit;
-  late final dynamic lesson;
-  late final dynamic page;
-  late final dynamic lessonProgress;
-  late final dynamic behaviorRating;
-  late final dynamic behaviorComment;
-  late final dynamic listeningRating;
-  late final dynamic listeningComment;
-  late final dynamic speakingRating;
-  late final dynamic speakingComment;
-  late final dynamic vocabularyRating;
-  late final dynamic vocabularyComment;
-  late final dynamic homeworkComment;
-  late final dynamic overallComment;
-  late final LessonStatus? lessonStatus;
+  late dynamic id;
+  late dynamic bookingId;
+  late dynamic lessonStatusId;
+  late dynamic book;
+  late dynamic unit;
+  late dynamic lesson;
+  late dynamic page;
+  late dynamic lessonProgress;
+  late dynamic behaviorRating;
+  late dynamic behaviorComment;
+  late dynamic listeningRating;
+  late dynamic listeningComment;
+  late dynamic speakingRating;
+  late dynamic speakingComment;
+  late dynamic vocabularyRating;
+  late dynamic vocabularyComment;
+  late dynamic homeworkComment;
+  late dynamic overallComment;
+  late dynamic lessonStatus;
 
-  ClassReview.fromJson(Map<String, dynamic> json) {
+  ClassReview.fromJson(Map<dynamic, dynamic> json) {
     id = json['id'];
     bookingId = json['bookingId'];
     lessonStatusId = json['lessonStatusId'];
-    book = null;
-    unit = null;
-    lesson = null;
-    page = null;
+    book = json['book'];
+    unit = json['unit'];
+    lesson = json['lesson'];
+    page = json['page'];
     lessonProgress = json['lessonProgress'];
     behaviorRating = json['behaviorRating'];
     behaviorComment = json['behaviorComment'];
@@ -295,8 +299,8 @@ class ClassReview {
     lessonStatus = LessonStatus.fromJson(json['lessonStatus']);
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final _data = <dynamic, dynamic>{};
     _data['id'] = id;
     _data['bookingId'] = bookingId;
     _data['lessonStatusId'] = lessonStatusId;
@@ -327,20 +331,20 @@ class LessonStatus {
     required this.createdAt,
     required this.updatedAt,
   });
-  late final dynamic id;
-  late final dynamic status;
-  late final dynamic createdAt;
-  late final dynamic updatedAt;
+  late dynamic id;
+  late dynamic status;
+  late dynamic createdAt;
+  late dynamic updatedAt;
 
-  LessonStatus.fromJson(Map<String, dynamic> json) {
+  LessonStatus.fromJson(Map<dynamic, dynamic> json) {
     id = json['id'];
     status = json['status'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
 
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
+  Map<dynamic, dynamic> toJson() {
+    final _data = <dynamic, dynamic>{};
     _data['id'] = id;
     _data['status'] = status;
     _data['createdAt'] = createdAt;

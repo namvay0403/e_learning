@@ -20,7 +20,7 @@ class _SchedulePageState extends State<SchedulePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<GetSchedulesCubit>().getSchedules(user.id);
+    context.read<GetSchedulesCubit>().getSchedules();
   }
 
   @override

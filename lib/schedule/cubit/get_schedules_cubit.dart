@@ -9,10 +9,10 @@ part 'get_schedules_state.dart';
 class GetSchedulesCubit extends Cubit<GetSchedulesState> {
   GetSchedulesCubit() : super(GetSchedulesInitial());
 
-  Future<void> getSchedules(String userId) async {
+  Future<void> getSchedules() async {
     emit(GetSchedulesLoading());
     try {
-      final schedules = await ScheduleRepo().getSchedules(userId);
+      final schedules = await ScheduleRepo().getSchedules();
       emit(GetSchedulesSuccess(schedules: schedules));
     } catch (e) {
       emit(GetSchedulesFailed(message: e.toString()));
