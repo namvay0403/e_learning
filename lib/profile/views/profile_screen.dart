@@ -1,12 +1,12 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:e_learning/authenticate/model/user_model.dart';
-import 'package:e_learning/profile/cubits/update_avatar/update_profile_cubit.dart';
-import 'package:e_learning/profile/cubits/update_profile/update_avatar_cubit.dart';
+import 'package:e_learning/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utilities/button/buttonCustom.dart';
 import '../../utilities/constants/constants.dart';
 import '../../utilities/constants/list_provider.dart';
+import '../cubits/update_avatar/update_avatar_cubit.dart';
+import '../cubits/update_profile/update_profile_cubit.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,8 +18,9 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final formKeyProfile = GlobalKey<FormState>();
 
-  late String userName;
-  late String avatar;
+  TextEditingController nameController = TextEditingController(text: user.name);
+  TextEditingController countryController =
+      TextEditingController(text: user.country);
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       listener: (context, state) {
         // TODO: implement listener
         if (state is UpdateProfileSuccess) {
+          nameController.text = state.user.name!;
+          countryController.text = state.user.country!;
           AwesomeDialog(
             context: context,
             dialogType: DialogType.success,
@@ -34,6 +37,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             showCloseIcon: true,
             title: "Update",
             desc: "Update Successfully",
+            btnOkOnPress: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomePage()));
+            },
+          ).show();
+        }
+
+        if (state is UpdateProfileFailed) {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.error,
+            animType: AnimType.topSlide,
+            showCloseIcon: true,
+            title: "Failed",
+            desc: state.message,
             btnOkOnPress: () {},
           ).show();
         }
@@ -45,33 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                BlocConsumer<UpdateAvatarCubit, UpdateAvatarState>(
-                    listener: (context, state) {
-                  // TODO: implement listener
-                  if (state is UpdateAvatarSuccess) {
-                    AwesomeDialog(
-                      context: context,
-                      dialogType: DialogType.success,
-                      animType: AnimType.topSlide,
-                      showCloseIcon: true,
-                      title: "Update",
-                      desc: "Update Avatar Successfully",
-                      btnOkOnPress: () {},
-                    ).show();
-                  }
-                }, builder: (context, state) {
-                  return InkWell(
-                    onTap: () {
-                      context
-                          .read<UpdateAvatarCubit>()
-                          .updateProfile(newAvatarPath: AppAssets.google);
-                    },
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage('${user.avatar}'),
-                      radius: 60,
-                    ),
-                  );
-                }),
+                Avatar(user.avatar!),
                 sizedBox.largeHeight(),
                 Form(
                   key: formKeyProfile,
@@ -108,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       sizedBox.mediumHeight(),
                       SizedBox(
                         child: TextFormField(
-                          initialValue: user.name,
+                          controller: nameController,
                           style: TextStyle(fontFamily: fontApp),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(padding.medium),
@@ -136,10 +128,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               return null;
                             }
                           },
-                          onChanged: (text) {
-                            setState(() {
-                              userName = text;
-                            });
+                        ),
+                      ),
+                      sizedBox.mediumHeight(),
+                      SizedBox(
+                        child: TextFormField(
+                          controller: countryController,
+                          style: TextStyle(fontFamily: fontApp),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(padding.medium),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            labelText: 'Country',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: Colors.blueGrey),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: colorProject.primaryColor, width: 1.5),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          validator: (input) {
+                            if (input!.isEmpty) {
+                              return 'Not empty';
+                            } else {
+                              return null;
+                            }
                           },
                         ),
                       ),
@@ -148,15 +168,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         label: 'SAVE',
                         onPressed: () {
                           if (formKeyProfile.currentState!.validate()) {
-                            // User newUser = new User(
-                            //   userName: userName,
-                            //   historyCourses: historyCourses,
-                            //   myCourses: courses,
-                            // );
-                            // context
-                            //     .read<UpdateProfileCubit>()
-                            //     .updateProfile(newUser: newUser);
-                            // print('newUser is : ${user.userName}');
+                            context.read<UpdateProfileCubit>().updateProfile(
+                                  nameController.text,
+                                  countryController.text,
+                                );
                           }
                         },
                       ),
@@ -169,5 +184,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  Widget Avatar(String avatarPath) {
+    return BlocConsumer<UpdateAvatarCubit, UpdateAvatarState>(
+        listener: (context, state) {
+      // TODO: implement listener
+      if (state is UpdateAvatarLoading) {
+        const AlertDialog(
+          content: SizedBox(
+            height: 100,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: colorProject.primaryColor,
+              ),
+            ),
+          ),
+        );
+      }
+      if (state is UpdateAvatarSuccess) {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.success,
+          animType: AnimType.topSlide,
+          showCloseIcon: true,
+          title: "Update",
+          desc: "Update Avatar Successfully",
+          btnOkOnPress: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => HomePage()));
+          },
+        ).show();
+      }
+      if (state is UpdateAvatarFailed) {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.topSlide,
+          showCloseIcon: true,
+          title: "Failed",
+          desc: state.message,
+          btnOkOnPress: () {},
+        ).show();
+      }
+    }, builder: (context, state) {
+      return InkWell(
+        onTap: () {
+          context.read<UpdateAvatarCubit>().updateAvatar();
+        },
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(avatarPath),
+          radius: 60,
+        ),
+      );
+    });
   }
 }
