@@ -14,6 +14,7 @@ class UpdateAvatarCubit extends Cubit<UpdateAvatarState> {
     emit(UpdateAvatarLoading());
     try {
       String avatarPath = await ProfileRepo().updateAvatar();
+      user.avatar = avatarPath;
       emit(UpdateAvatarSuccess(avatarPath));
     } catch (e) {
       emit(UpdateAvatarFailed(e.toString()));
