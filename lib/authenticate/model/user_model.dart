@@ -24,7 +24,7 @@ class User {
   late final String id;
   late final String? email;
   late final String? name;
-  late final dynamic avatar;
+  late dynamic avatar;
   late final String? country;
   late final String? phone;
   late final List<String>? roles;
