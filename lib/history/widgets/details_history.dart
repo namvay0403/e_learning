@@ -2,12 +2,13 @@ import 'package:e_learning/history/model/history_courses_model.dart';
 import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
 
+import '../../schedule/model/schedule_model.dart';
 import '../../utilities/constants/constants.dart';
 
 class DetailHistory extends StatelessWidget {
-  const DetailHistory({super.key, required this.historyCourse});
+  const DetailHistory({super.key, required this.scheduleModel});
 
-  final HistoryCourses historyCourse;
+  final ScheduleModel scheduleModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +25,23 @@ class DetailHistory extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                  '${historyCourse.time.month},${historyCourse.time.day},${historyCourse.time.year}',
+              Text('${scheduleModel.scheduleDetailInfo!.scheduleInfo!.date}',
                   style: textStyle.headerStyle()),
-              Text('${historyCourse.timeAgo} hours ago'),
-              personalInfo(teacherId: historyCourse.teacherId),
+              personalInfo(
+                  scheduleModel
+                      .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.avatar,
+                  scheduleModel
+                      .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.name,
+                  scheduleModel
+                      .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.country),
               sizedBox.largeHeight(),
               infoLesson(
-                  start: historyCourse.start,
-                  end: historyCourse.end,
+                  start:
+                      scheduleModel.scheduleDetailInfo!.scheduleInfo!.startTime,
+                  end: scheduleModel.scheduleDetailInfo!.scheduleInfo!.endTime,
                   size: size.width),
               sizedBox.largeHeight(),
-              requestForLesson(
-                  request: historyCourse.request, review: historyCourse.review),
+              requestForLesson(request: 'No request', review: 'No review'),
               observe(),
               sizedBox.mediumHeight(),
               button(),
@@ -76,7 +81,7 @@ Widget observe() {
 }
 
 Widget infoLesson(
-    {required double size, required DateTime start, required DateTime end}) {
+    {required double size, required String start, required String end}) {
   return Container(
     color: Colors.white,
     width: size,
@@ -86,7 +91,7 @@ Widget infoLesson(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Lesson Time: ${start.hour}:${start.minute} - ${end.hour}:${end.minute}',
+            'Lesson Time: $start - $end',
             style: textStyle.normalStyle(fontSize: 20),
           ),
         ],
@@ -101,7 +106,7 @@ Widget button() {
     children: [
       Container(
         decoration: const BoxDecoration(
-          color: colorProject.primaryColor,
+          color: Colors.grey,
         ),
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -220,7 +225,7 @@ Widget requestForLesson({required String request, required String review}) {
   );
 }
 
-Widget personalInfo({required int teacherId}) {
+Widget personalInfo(String avatar, String name, String country) {
   return Container(
     color: Colors.white,
     child: Padding(
@@ -228,7 +233,7 @@ Widget personalInfo({required int teacherId}) {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage(AppAssets.avatar),
+            backgroundImage: NetworkImage(avatar),
             radius: 40,
           ),
           sizedBox.largeWidth(),
@@ -236,10 +241,10 @@ Widget personalInfo({required int teacherId}) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${teachers[teacherId].name}',
+                name,
                 style: textStyle.headerStyle(fontSize: 15),
               ),
-              Text('${teachers[teacherId].country}'),
+              Text(country),
               Row(
                 children: [
                   const Icon(

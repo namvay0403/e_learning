@@ -1,5 +1,6 @@
 import 'package:e_learning/schedule/model/schedule_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../utilities/constants/constants.dart';
 
@@ -23,13 +24,22 @@ class DetailLesson extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Thu, 26 Oct 23', style: textStyle.headerStyle()),
+              Text(scheduleModel.scheduleDetailInfo!.scheduleInfo!.date,
+                  style: textStyle.headerStyle()),
               const Text('1 lesson'),
-              personalInfo(),
+              personalInfo(
+                  scheduleModel
+                      .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.avatar,
+                  scheduleModel
+                      .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.name,
+                  scheduleModel
+                      .scheduleDetailInfo!.scheduleInfo!.tutorInfo!.country),
               sizedBox.largeHeight(),
-              infoLesson(),
+              infoLesson(
+                  scheduleModel.scheduleDetailInfo!.scheduleInfo!.startTime,
+                  scheduleModel.scheduleDetailInfo!.scheduleInfo!.endTime),
               sizedBox.largeHeight(),
-              button(),
+              button(scheduleModel.tutorMeetingLink!),
             ],
           ),
         ),
@@ -38,7 +48,7 @@ class DetailLesson extends StatelessWidget {
   }
 }
 
-Widget infoLesson() {
+Widget infoLesson(String startTime, String endTime) {
   return Container(
     color: Colors.white,
     child: Padding(
@@ -46,16 +56,10 @@ Widget infoLesson() {
       child: Column(
         children: [
           Text(
-            'Lesson Time: 02:00 - 03:25',
+            'Lesson Time: ${startTime} - ${endTime}',
             style: textStyle.normalStyle(fontSize: 20),
           ),
           sizedBox.largeHeight(),
-          infoTimeLesson(time: 'Session 1: 02:00 - 02:25'),
-          sizedBox.mediumHeight(),
-          infoTimeLesson(time: 'Session 2: 02:30 - 02:55'),
-          sizedBox.mediumHeight(),
-          infoTimeLesson(time: 'Session 3: 03:00 - 03:25'),
-          sizedBox.mediumHeight(),
           requestForLesson(),
         ],
       ),
@@ -63,21 +67,27 @@ Widget infoLesson() {
   );
 }
 
-Widget button() {
+Widget button(String tutorMeetingLink) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
-      Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black12),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Text(
-            'Go to meetings',
-            style: textStyle.normalStyle(
-              fontSize: 20,
-              color: Colors.grey,
+      InkWell(
+        onTap: () {},
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black12),
+            color: tutorMeetingLink == null
+                ? Colors.grey
+                : colorProject.primaryColor,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(
+              'Go to meetings',
+              style: textStyle.normalStyle(
+                fontSize: 20,
+                color: tutorMeetingLink == null ? Colors.grey : Colors.white,
+              ),
             ),
           ),
         ),
@@ -161,7 +171,7 @@ Widget infoTimeLesson({required String time}) {
   );
 }
 
-Widget personalInfo() {
+Widget personalInfo(String avatar, String name, String country) {
   return Container(
     color: Colors.white,
     child: Padding(
@@ -169,7 +179,7 @@ Widget personalInfo() {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage(AppAssets.avatar),
+            backgroundImage: NetworkImage(avatar),
             radius: 40,
           ),
           sizedBox.largeWidth(),
@@ -177,10 +187,10 @@ Widget personalInfo() {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'LE THANH NAM',
+                name,
                 style: textStyle.headerStyle(fontSize: 15),
               ),
-              const Text('Viet Nam'),
+              Text(country),
               Row(
                 children: [
                   const Icon(

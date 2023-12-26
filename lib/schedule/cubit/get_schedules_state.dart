@@ -8,7 +8,7 @@ class GetSchedulesInitial extends GetSchedulesState {}
 class GetSchedulesLoading extends GetSchedulesState {}
 
 class GetSchedulesSuccess extends GetSchedulesState {
-  List<ScheduleModel> schedules;
+  List<dynamic> schedules;
   GetSchedulesSuccess({required this.schedules});
 }
 
