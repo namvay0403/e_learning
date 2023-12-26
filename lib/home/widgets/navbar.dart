@@ -9,13 +9,20 @@ import 'package:e_learning/profile/views/profile_page.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../history/view/history_page.dart';
+import '../../profile/cubits/get_user_info/get_user_info_cubit.dart';
 import '../../schedule/schedule.dart';
 
-class NavBar extends StatelessWidget {
+class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
