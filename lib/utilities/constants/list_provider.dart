@@ -8,6 +8,7 @@ import 'package:e_learning/teachers/cubit/favourite/favourite_teacher_cubit.dart
 import 'package:e_learning/teachers/cubit/get_teacher_by_id/get_teacher_by_id_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../courses/cubit/filter_courses/filter_courses_cubit.dart';
 import '../../courses/cubit/get_courses/get_courses_cubit.dart';
 import '../../courses/model/course_model.dart';
 import '../../detail_teacher/cubit/get_reviews/get_reviews_cubit.dart';
@@ -27,6 +28,8 @@ User user = User();
 List<Teacher> filterListTeachers = [];
 
 List<Teacher> teachers = [];
+
+List<Course> filterCourses = [];
 
 final listProvider = [
   BlocProvider<GetUserInfoCubit>(
@@ -77,5 +80,9 @@ final listProvider = [
   // get courses
   BlocProvider<GetCoursesCubit>(
     create: (_) => GetCoursesCubit(),
+  ),
+  // filter courses
+  BlocProvider<FilterCoursesCubit>(
+    create: (_) => FilterCoursesCubit(),
   ),
 ];
