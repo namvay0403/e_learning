@@ -1,13 +1,22 @@
+import 'package:e_learning/utilities/constants/list_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../utilities/constants/constants.dart';
+import '../cubit/filter_courses/filter_courses_cubit.dart';
 
-class IntroCourses extends StatelessWidget {
+class IntroCourses extends StatefulWidget {
   const IntroCourses({super.key});
 
   @override
+  State<IntroCourses> createState() => _IntroCoursesState();
+}
+
+class _IntroCoursesState extends State<IntroCourses> {
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    TextEditingController searchController = TextEditingController();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: padding.large),
       child: Column(
@@ -53,6 +62,13 @@ class IntroCourses extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        onChanged: (text) {
+                          text = text.toLowerCase();
+                          setState(() {
+                            context.read<FilterCoursesCubit>().filter(text);
+                            print('Test Find: ${filterCourses.length}');
+                          });
+                        },
                       ),
                     ),
                   ],

@@ -1,3 +1,4 @@
+import 'package:e_learning/courses/cubit/filter_courses/filter_courses_cubit.dart';
 import 'package:e_learning/courses/cubit/get_courses/get_courses_cubit.dart';
 import 'package:e_learning/utilities/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -34,20 +35,33 @@ class _CoursesScreenState extends State<CoursesScreen> {
             sizedBox.mediumHeight(),
             const FilterCourses(),
             sizedBox.mediumHeight(),
-            BlocBuilder<GetCoursesCubit, GetCoursesState>(
+            BlocBuilder<FilterCoursesCubit, FilterCoursesState>(
               builder: (context, state) {
-                if (state is GetCoursesLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is GetCoursesLoaded) {
+                if (state is FilterCoursesLoaded) {
+                  if (state.courses.length == 0) {
+                    return const Center(
+                      child: Text('No courses found'),
+                    );
+                  }
                   return PagesView(courses: state.courses);
-                } else if (state is GetCoursesFailed) {
-                  return Center(
-                    child: Text(state.message),
+                } else {
+                  return BlocBuilder<GetCoursesCubit, GetCoursesState>(
+                    builder: (context, state) {
+                      if (state is GetCoursesLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (state is GetCoursesLoaded) {
+                        return PagesView(courses: state.courses);
+                      } else if (state is GetCoursesFailed) {
+                        return Center(
+                          child: Text(state.message),
+                        );
+                      }
+                      return Container();
+                    },
                   );
                 }
-                return Container();
               },
             ),
           ],
