@@ -1,6 +1,7 @@
 import 'package:e_learning/schedule/model/schedule_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jitsi_meet_flutter_sdk/jitsi_meet_flutter_sdk.dart';
 
 import '../../utilities/constants/constants.dart';
 
@@ -39,7 +40,7 @@ class DetailLesson extends StatelessWidget {
                   scheduleModel.scheduleDetailInfo!.scheduleInfo!.startTime,
                   scheduleModel.scheduleDetailInfo!.scheduleInfo!.endTime),
               sizedBox.largeHeight(),
-              button(scheduleModel.tutorMeetingLink!),
+              button(scheduleModel.scheduleDetailId!),
             ],
           ),
         ),
@@ -67,16 +68,23 @@ Widget infoLesson(String startTime, String endTime) {
   );
 }
 
-Widget button(String tutorMeetingLink) {
+Widget button(String scheduleDetailId) {
+  final jitsiMeet = JitsiMeet();
+  void join() {
+    var options = JitsiMeetConferenceOptions(
+        room: 'https://meet.lettutor.com/$scheduleDetailId');
+    jitsiMeet.join(options);
+  }
+
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
       InkWell(
-        onTap: () {},
+        onTap: join,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black12),
-            color: tutorMeetingLink == null
+            color: scheduleDetailId == null
                 ? Colors.grey
                 : colorProject.primaryColor,
           ),
@@ -86,7 +94,7 @@ Widget button(String tutorMeetingLink) {
               'Go to meetings',
               style: textStyle.normalStyle(
                 fontSize: 20,
-                color: tutorMeetingLink == null ? Colors.grey : Colors.white,
+                color: scheduleDetailId == null ? Colors.grey : Colors.white,
               ),
             ),
           ),
