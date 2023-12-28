@@ -187,7 +187,10 @@ class ListTileWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => const LoginPage()));
+          },
         ),
       ],
     );
