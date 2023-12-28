@@ -29,7 +29,7 @@ class _BecomeTutorScreenState extends State<BecomeTutorScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage(AppAssets.avatar),
+                backgroundImage: NetworkImage(user.avatar),
                 radius: 60,
               ),
               sizedBox.largeHeight(),
@@ -69,6 +69,7 @@ class _BecomeTutorScreenState extends State<BecomeTutorScreen> {
                       SizedBox(
                         child: TextFormField(
                           style: TextStyle(fontFamily: fontApp),
+                          initialValue: user.name,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(padding.medium),
                             border: OutlineInputBorder(
