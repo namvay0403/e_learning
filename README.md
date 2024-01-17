@@ -17,3 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 Link to DrawIo: https://drive.google.com/file/d/1poHW2CoejVcTuAELVvp9ZQ1mVJIAeLKj/view?usp=sharing
 Link to Demo: https://youtu.be/h00TclnN6qs?si=Qd3QJOD5VrsxT-5W
+Link to Checklist: https://docs.google.com/document/d/11B2iXgGWhWV-WdriBuIeUr-6XhLSek4B/edit?usp=sharing&ouid=113849637204610144701&rtpof=true&sd=true
