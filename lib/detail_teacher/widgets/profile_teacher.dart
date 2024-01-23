@@ -21,6 +21,15 @@ class ProfileTeacher extends StatefulWidget {
 }
 
 class _ProfileTeacherState extends State<ProfileTeacher> {
+  late bool isFavorite;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isFavorite = widget.teacher.isFavorite!;
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -72,12 +81,16 @@ class _ProfileTeacherState extends State<ProfileTeacher> {
                 Column(
                   children: [
                     InkWell(
-                      onTap: () async {
+                      onTap: () {
                         // await context
                         //     .read<GetTeachersCubit>()
                         //     .addFavouriteTeacher(id: teacher.id);
+                        setState(() {
+                          isFavorite = !isFavorite;
+                        });
+                        print(isFavorite);
                       },
-                      child: widget.teacher.isFavorite == true
+                      child: isFavorite == true
                           ? Icon(
                               Icons.favorite,
                               size: 35,
@@ -85,6 +98,7 @@ class _ProfileTeacherState extends State<ProfileTeacher> {
                             )
                           : Icon(
                               Icons.favorite,
+                              color: Colors.black,
                               size: 35,
                             ),
                     ),
